@@ -1,0 +1,133 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.bookUl {
+  display: flex;
+  justify-content: center;
+}
+
+.bookUl li {
+  margin: 2rem;
+}
+
+img {
+  max-width: 20rem;
+  max-height: 50rem;
+}
+
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: blue;
+  color: white;
+  margin-bottom: .5rem;
+  padding-bottom: 0;
+  height: 4.5rem;
+  align-items: center;
+}
+
+.header ul {
+  display: flex;
+}
+
+.header div {
+  margin: 1rem;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  background-color: green;
+  color: white;
+  width:100%;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+.navLink {
+  color: white;
+  text-decoration: none;
+}
+
+.add-book {
+  height: 20rem;
+}
+div .makeGardenLink {
+  display: flex;
+  margin-left: auto;
+}
+
+
+.hello {
+  width: 40px;
+  height: 40px;
+}
+.container-drag {
+  text-align: center;
+}
+
+.tbp {
+
+  width: 150px;
+  height: 100vh;
+  left: 0;
+  border-right: 1px dotted;
+}
+
+.header-plant {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+  width: 100%;
+}
+
+.task-header {
+  display: inline-block;
+  background-color: skyblue;
+  width: 100%;
+}
+
+.droppable {
+  position: absolute;
+  width: 150px;
+  height: 100vh;
+  right: 0;
+  border-left: 1px dotted;
+}
+
+.draggable {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  margin: 5px auto;
+  line-height: 5em;
+}
+
+.drag-body {
+  display: flex;
+
+}
