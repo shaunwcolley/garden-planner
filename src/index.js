@@ -13,6 +13,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 //Imports from custom js file components
 import {BaseLayout} from './components/BaseLayout'
+import {MakePlan} from './components/MakePlan'
+import {Login} from './components/Login'
 
 
 
@@ -21,8 +23,8 @@ ReactDOM.render(
     <BaseLayout>
       <Switch>
         <Route path="/" exact component={App} />
-        <Route path="/make-garden" exact component={App} />
-        <Route path="/login" exact component={App} />
+        <Route path="/make-garden" component={MakePlan} />
+        <Route path="/login" component={Login} />
       </Switch>
     </BaseLayout>
   </BrowserRouter>

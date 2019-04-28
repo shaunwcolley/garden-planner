@@ -52,7 +52,7 @@ export class Draggable extends Component {
     })
     return(
       <div className="container-drag">
-        <h3 className="header-plant">Choose a plant to plant</h3>
+        <h3 className="header-plant">Choose a plant:</h3>
         <div className="drag-body">
           <div className="tbp"
               onDragOver={(e) => this.onDragOver(e)}
