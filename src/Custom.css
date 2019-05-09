@@ -10,20 +10,6 @@ ul {
   list-style: none;
 }
 
-.bookUl {
-  display: flex;
-  justify-content: center;
-}
-
-.bookUl li {
-  margin: 2rem;
-}
-
-img {
-  max-width: 20rem;
-  max-height: 50rem;
-}
-
 .header {
   display: flex;
   position: sticky;
@@ -112,10 +98,9 @@ div .makeGardenLink {
 }
 
 .droppable {
-  position: absolute;
+  
   width: 150px;
-  height: 100vh;
-  right: 0;
+  height: 50vh;
   border-left: 1px dotted;
 }
 
