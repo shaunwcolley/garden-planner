@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Draggable extends Component {
+class Planner extends Component {
   state = {
     plantsToChoose: [
       {name: "Tomato", bgcolor: "red"},
@@ -119,4 +119,4 @@ class Draggable extends Component {
 
 }
 
-export default Draggable
+export default Planner
