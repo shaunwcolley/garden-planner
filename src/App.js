@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-import {Draggable} from './components/Draggable'
+import Draggable from './components/Draggable'
 
 class App extends Component {
 
