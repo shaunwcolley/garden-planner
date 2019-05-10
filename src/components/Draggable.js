@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-export class Draggable extends Component {
+class Draggable extends Component {
   state = {
     plantsToChoose: [
-      {name: "Tomato", category:'tbp', bgcolor: "red"},
-      {name: "Corn", category:'tbp', bgcolor: "yellow"},
-      {name: "Lettuce", category:'tbp', bgcolor: "green"}
+      {name: "Tomato", bgcolor: "red"},
+      {name: "Corn", bgcolor: "yellow"},
+      {name: "Lettuce", bgcolor: "green"}
     ],
-    plantsInPlan: []
+    plantsInPlan: {
+      t1: [],
+      t2: [],
+      t3: []
+    }
   }
 
   onDragStart = (e, id) => {
@@ -21,17 +25,35 @@ export class Draggable extends Component {
   }
 
   onDrop = (e, category) => {
-    let id = e.dataTransfer.getData("id")
+    if(category === null){
+      console.log('eventually remove drop')
+    } else {
+      let id = e.dataTransfer.getData("id")
+      let plants = this.state.plantsToChoose.filter((plant) => {
+        return plant.name === id
+      })
+      let newPlant = plants[0]
+      this.setState({
+        plantsInPlan: {
+          ...this.state.plantsInPlan,
+          [category]: this.state.plantsInPlan[category].concat(newPlant)
+        }
+      })
+    }
+  }
 
-    let plants = this.state.plantsToChoose.filter((plant) => {
-      if (plant.name === id) {
-        plant.category = category
-        return plant
-      }
-    })
-    this.setState({
-      ...this.state,
-      plantsInPlan: this.state.plantsInPlan.concat(plants)
+  categoryLoop = (category, array) => {
+    this.state.plantsInPlan[category].forEach ((plant, index) => {
+        array.inPlan[category].push(
+          <div key={index}
+              onDragStart = {(e) => this.onDragStart(e, plant.name)}
+              draggable
+              className="draggable"
+              style= {{backgroundColor: plant.bgcolor}}
+          >
+            {plant.name}
+          </div>
+        )
     })
   }
 
@@ -56,19 +78,11 @@ export class Draggable extends Component {
         </div>
       )
     })
-    this.state.plantsInPlan.forEach ((plant) => {
-      if(plant.category === null)
-      plants.inPlan[plant.category].push(
-        <div key={plant.name}
-            onDragStart = {(e) => this.onDragStart(e, plant.name)}
-            draggable
-            className="draggable"
-            style= {{backgroundColor: plant.bgcolor}}
-        >
-          {plant.name}
-        </div>
-      )
-    })
+
+    this.categoryLoop('t1',plants)
+    this.categoryLoop('t2',plants)
+    this.categoryLoop('t3',plants)
+
     return(
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
@@ -104,3 +118,5 @@ export class Draggable extends Component {
   }
 
 }
+
+export default Draggable
