@@ -4,7 +4,16 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  return state
+  switch(action.type) {
+    case 'SIZE_SAVE' :
+    return {
+      ...state,
+      width: action.dimensions.width,
+      height: action.dimensions.height
+    }
+    default:
+    return state
+  }
 }
 
 export default reducer

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class Planner extends Component {
   state = {
@@ -15,7 +16,6 @@ class Planner extends Component {
   }
 
   onDragStart = (e, id) => {
-    //console.log('dragstart:', id)
     //id is key given from plant.name in li
     e.dataTransfer.setData("id", id)
   }
@@ -58,6 +58,10 @@ class Planner extends Component {
   }
 
   render() {
+    if (this.props.height === 0 || this.props.width === 0) {
+      this.props.history.push('/plan-size')
+    }
+    console.log(this.props.height)
     let plants = {
       toChoose: [],
       inPlan: {
@@ -119,4 +123,11 @@ class Planner extends Component {
 
 }
 
-export default Planner
+const mapStateToProps = (state) => {
+  return {
+    width: state.width,
+    height: state.height
+  }
+}
+
+export default connect(mapStateToProps)(Planner)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class PlanSize extends Component {
   constructor() {
@@ -15,6 +16,8 @@ class PlanSize extends Component {
   }
 
   handleSaveSizeClick = () => {
+    let dimensions = this.state
+    this.props.onSizeSave(dimensions)
     this.props.history.push('/Planner')
   }
   render() {
@@ -30,4 +33,10 @@ class PlanSize extends Component {
   }
 }
 
-export default PlanSize
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSizeSave: (dimensions) => dispatch({type: 'SIZE_SAVE', dimensions: dimensions})
+  }
+}
+
+export default connect(null,mapDispatchToProps)(PlanSize)
