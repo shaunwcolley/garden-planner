@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 class Planner extends Component {
-  state = {
-    plantsToChoose: [
-      {name: "Tomato", bgcolor: "red"},
-      {name: "Corn", bgcolor: "yellow"},
-      {name: "Lettuce", bgcolor: "green"}
-    ],
-    plantsInPlan: {
-      t1: [],
-      t2: [],
-      t3: []
+  constructor (props) {
+    super (props)
+
+    this.state = {
+      plantsToChoose: [
+        {name: "Tomato", bgcolor: "red"},
+        {name: "Corn", bgcolor: "yellow"},
+        {name: "Lettuce", bgcolor: "green"}
+      ],
+      plantsInPlan: this.props.cells
     }
   }
 
@@ -42,9 +42,12 @@ class Planner extends Component {
     }
   }
 
-  categoryLoop = (category, array) => {
-    this.state.plantsInPlan[category].forEach ((plant, index) => {
-        array.inPlan[category].push(
+  categoryLoop = (array) => {
+    let a = Object.keys(this.state.plantsInPlan)
+    for(let i = 1; i < (a.length + 1) ; i++) {
+      let category = "t" + i
+      this.state.plantsInPlan[category].forEach ((plant, index) => {
+        array.inPlan[category] =
           <div key={index}
               onDragStart = {(e) => this.onDragStart(e, plant.name)}
               draggable
@@ -53,39 +56,36 @@ class Planner extends Component {
           >
             {plant.name}
           </div>
-        )
-    })
+      })
+    }
   }
 
   render() {
     if (this.props.height === 0 || this.props.width === 0) {
       this.props.history.push('/plan-size')
     }
-    console.log(this.props.height)
+
     let plants = {
       toChoose: [],
-      inPlan: {
-        t1: [],
-        t2: [],
-        t3: []
-      }
+      inPlan: this.props.cells
     }
+
     this.state.plantsToChoose.forEach ((plant) => {
       plants.toChoose.push(
-        <div key={plant.name}
+        <tr key={plant.name}><td key={plant.name}
             onDragStart = {(e) => this.onDragStart(e, plant.name)}
             draggable
             className="draggable"
             style= {{backgroundColor: plant.bgcolor}}
         >
           {plant.name}
-        </div>
+        </td></tr>
       )
     })
 
-    this.categoryLoop('t1',plants)
-    this.categoryLoop('t2',plants)
-    this.categoryLoop('t3',plants)
+    this.categoryLoop(plants)
+    console.log(plants)
+
 
     return(
       <div className="container-drag">
@@ -95,8 +95,7 @@ class Planner extends Component {
               onDragOver={(e) => this.onDragOver(e)}
               onDrop={(e)=> this.onDrop(e,null)}
               >
-              <span className="section-header">To Be Planted</span>
-              {plants.toChoose}
+              <table><tbody><tr><td className="section-header">Plants</td></tr>{plants.toChoose}</tbody></table>
           </div>
           <div className="droppable"
               onDragOver={(e) => this.onDragOver(e)}
@@ -126,7 +125,8 @@ class Planner extends Component {
 const mapStateToProps = (state) => {
   return {
     width: state.width,
-    height: state.height
+    height: state.height,
+    cells: state.cells
   }
 }
 
