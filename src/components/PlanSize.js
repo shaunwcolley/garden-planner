@@ -18,7 +18,7 @@ class PlanSize extends Component {
   handleSaveSizeClick = () => {
     let dimensions = this.state
     this.props.onSizeSave(dimensions)
-    this.props.history.push('/Planner')
+    this.props.history.push('/planner')
   }
   render() {
     return(

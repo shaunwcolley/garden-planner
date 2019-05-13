@@ -84,8 +84,6 @@ class Planner extends Component {
     })
 
     this.categoryLoop(plants)
-    console.log(plants)
-
 
     return(
       <div className="container-drag">
