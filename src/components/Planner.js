@@ -11,7 +11,11 @@ class Planner extends Component {
         {name: "Corn", bgcolor: "yellow"},
         {name: "Lettuce", bgcolor: "green"}
       ],
-      plantsInPlan: this.props.cells
+      plantsInPlan: this.props.cells,
+      table: '',
+      plants: {
+        inPlan: ''
+      }
     }
   }
 
@@ -36,29 +40,65 @@ class Planner extends Component {
       this.setState({
         plantsInPlan: {
           ...this.state.plantsInPlan,
-          [category]: this.state.plantsInPlan[category].concat(newPlant)
+          [category]: newPlant
         }
+      }, () => {
+        this.tableGenerate()
       })
     }
   }
 
-  categoryLoop = (array) => {
-    let a = Object.keys(this.state.plantsInPlan)
-    for(let i = 1; i < (a.length + 1) ; i++) {
-      let category = "t" + i
-      this.state.plantsInPlan[category].forEach ((plant, index) => {
-        array.inPlan[category] =
-          <div key={index}
+  categoryAndTable = () => {
+
+  }
+
+
+  tableGenerate = () => {
+    let rows = []
+    let cellNames = Object.keys(this.props.cells)
+    let cells = cellNames.map(name => {
+
+      let plant = this.state.plantsInPlan[name]
+
+      return <div key={name}className="droppable"
+          onDragOver={(e) => this.onDragOver(e)}
+          onDrop={(e) => this.onDrop(e, name)}><div
               onDragStart = {(e) => this.onDragStart(e, plant.name)}
               draggable
               className="draggable"
               style= {{backgroundColor: plant.bgcolor}}
           >
             {plant.name}
-          </div>
-      })
+          </div></div>
+    })
+
+    for (let i = 0; i < this.props.width; i++) {
+      rows.push([])
     }
+    let count = 0
+    for(let i = 0; i < this.props.width; i++) {
+      for(let j = 0; j < this.props.height; j++) {
+        rows[i].push(cells[count])
+        count++
+      }
+    }
+
+    let table = rows.map((row,index) => {
+      return (
+        <div className="customRow"key={index}>
+        {row}
+        </div>
+      )
+    })
+    this.setState({
+      table: table
+    })
   }
+
+  componentDidMount(){
+    this.tableGenerate()
+  }
+
 
   render() {
     if (this.props.height === 0 || this.props.width === 0) {
@@ -66,9 +106,9 @@ class Planner extends Component {
     }
 
     let plants = {
-      toChoose: [],
-      inPlan: this.props.cells
+      toChoose: []
     }
+
 
     this.state.plantsToChoose.forEach ((plant) => {
       plants.toChoose.push(
@@ -83,8 +123,6 @@ class Planner extends Component {
       )
     })
 
-    this.categoryLoop(plants)
-
     return(
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
@@ -95,23 +133,8 @@ class Planner extends Component {
               >
               <table><tbody><tr><td className="section-header">Plants</td></tr>{plants.toChoose}</tbody></table>
           </div>
-          <div className="droppable"
-              onDragOver={(e) => this.onDragOver(e)}
-              onDrop={(e) => this.onDrop(e, "t1")}>
-            <span className="section-header">Planted</span>
-            {plants.inPlan.t1}
-          </div>
-          <div className="droppable"
-              onDragOver={(e) => this.onDragOver(e)}
-              onDrop={(e) => this.onDrop(e, "t2")}>
-            <span className="section-header">Planted</span>
-            {plants.inPlan.t2}
-          </div>
-          <div className="droppable"
-              onDragOver={(e) => this.onDragOver(e)}
-              onDrop={(e) => this.onDrop(e, "t3")}>
-            <span className="section-header">Planted</span>
-            {plants.inPlan.t3}
+          <div>
+            {this.state.table}
           </div>
         </div>
       </div>

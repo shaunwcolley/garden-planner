@@ -18,10 +18,9 @@ import reducer from './store/reducers/reducer'
 import {BaseLayout} from './components/BaseLayout'
 import {MakePlan} from './components/MakePlan'
 import {Login} from './components/Login'
-// import Planner from './components/Planner'
+import Planner from './components/Planner'
 import PlanSize from './components/PlanSize'
 
-import PlannerTest from './components/PlannerTest'
 
 //Creating Redux Store
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -35,7 +34,7 @@ ReactDOM.render(
           <Route path="/make-garden" component={MakePlan} />
           <Route path="/login" component={Login} />
           <Route path="/plan-size" component={PlanSize} />
-          <Route path="/planner" component={PlannerTest} />
+          <Route path="/planner" component={Planner} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>

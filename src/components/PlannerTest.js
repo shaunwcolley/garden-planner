@@ -9,7 +9,7 @@ class Planner extends Component {
     let rows = []
     let cellNames = Object.keys(this.props.cells)
     let cells = cellNames.map(name => {
-      return <td>{name}</td>
+      return <td><div>{name}</div></td>
     })
 
     for (let i = 0; i < this.props.width; i++) {
@@ -23,19 +23,16 @@ class Planner extends Component {
       }
     }
 
-    let divs = []
-
-    let tableRows = rows.map(row => {
+    let table = rows.map((row,index) => {
       return (
         <tr>
         {row}
         </tr>
       )
     })
-    console.log(tableRows)
 
     this.state = {
-      table: tableRows
+      table: table
     }
   }
 
