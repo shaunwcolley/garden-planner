@@ -98,16 +98,15 @@ div .makeGardenLink {
 }
 
 .droppable {
-  
-  width: 150px;
-  height: 50vh;
-  border-left: 1px dotted;
+
+  width: 120px;
+  height: 120px;
+  border: 1px solid;
 }
 
 .draggable {
   width: 100px;
   height: 100px;
-  background-color: yellow;
   margin: 5px auto;
   line-height: 5em;
 }
@@ -115,4 +114,7 @@ div .makeGardenLink {
 .drag-body {
   display: flex;
 
+}
+.customRow {
+  display: flex;
 }

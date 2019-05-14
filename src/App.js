@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-import Draggable from './components/Draggable'
+
 
 class App extends Component {
 
@@ -9,9 +9,7 @@ class App extends Component {
 
     return (
       <div>
-        Howdy, this is a garden planner app. Just hold on plants will be here eventually.
-
-        <Draggable/>
+        <h5>Howdy, this is a garden planner app. Just hold on plants will be here eventually.</h5>
       </div>
     )
   }
