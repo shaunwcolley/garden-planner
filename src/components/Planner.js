@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 class Planner extends Component {
   constructor (props) {
     super (props)
 
     this.state = {
-      plantsToChoose: [
-        {name: "Tomato", bgcolor: "red"},
-        {name: "Corn", bgcolor: "yellow"},
-        {name: "Lettuce", bgcolor: "green"}
-      ],
+      plantsToChoose: this.props.plants,
       plantsInPlan: this.props.cells,
       table: '',
       plants: {
@@ -37,6 +34,7 @@ class Planner extends Component {
         return plant.name === id
       })
       let newPlant = plants[0]
+      console.log(newPlant)
       this.setState({
         plantsInPlan: {
           ...this.state.plantsInPlan,
@@ -60,13 +58,13 @@ class Planner extends Component {
 
       let plant = this.state.plantsInPlan[name]
 
-      return <div key={name}className="droppable"
+      return <div key={name} className="droppable"
           onDragOver={(e) => this.onDragOver(e)}
           onDrop={(e) => this.onDrop(e, name)}><div
               onDragStart = {(e) => this.onDragStart(e, plant.name)}
               draggable
               className="draggable"
-              style= {{backgroundColor: plant.bgcolor}}
+              style= {{backgroundColor: "white"}}
           >
             {plant.name}
           </div></div>
@@ -96,6 +94,7 @@ class Planner extends Component {
   }
 
   componentDidMount(){
+    this.props.onPlantsFetched()
     this.tableGenerate()
   }
 
@@ -110,13 +109,13 @@ class Planner extends Component {
     }
 
 
-    this.state.plantsToChoose.forEach ((plant) => {
+    this.props.plants.forEach ((plant) => {
       plants.toChoose.push(
         <tr key={plant.name}><td key={plant.name}
             onDragStart = {(e) => this.onDragStart(e, plant.name)}
             draggable
             className="draggable"
-            style= {{backgroundColor: plant.bgcolor}}
+            style= {{backgroundColor: "white"}}
         >
           {plant.name}
         </td></tr>
@@ -147,8 +146,15 @@ const mapStateToProps = (state) => {
   return {
     width: state.width,
     height: state.height,
-    cells: state.cells
+    cells: state.cells,
+    plants: state.plants
   }
 }
 
-export default connect(mapStateToProps)(Planner)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onPlantsFetched: () => dispatch(actionCreators.plantsFetched())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Planner)
