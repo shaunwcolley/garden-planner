@@ -11,7 +11,7 @@ class Planner extends Component {
       plantsInPlan: this.props.cells,
       table: '',
       plants: {
-        inPlan: ''
+        inPlan: {}
       }
     }
   }
@@ -34,7 +34,6 @@ class Planner extends Component {
         return plant.name === id
       })
       let newPlant = plants[0]
-      console.log(newPlant)
       this.setState({
         plantsInPlan: {
           ...this.state.plantsInPlan,
@@ -57,17 +56,23 @@ class Planner extends Component {
     let cells = cellNames.map(name => {
 
       let plant = this.state.plantsInPlan[name]
-
-      return <div key={name} className="droppable"
-          onDragOver={(e) => this.onDragOver(e)}
-          onDrop={(e) => this.onDrop(e, name)}><div
-              onDragStart = {(e) => this.onDragStart(e, plant.name)}
-              draggable
-              className="draggable"
-              style= {{backgroundColor: "white"}}
-          >
-            {plant.name}
-          </div></div>
+      if(plant.length === 0){
+        return <div key={name} className="droppable"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, name)}>
+            </div>
+      }
+      else{
+        return <div key={name} className="droppable"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, name)}><div
+                onDragStart = {(e) => this.onDragStart(e, plant.name)}
+                draggable
+                className="draggable"
+                style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
+            >
+            </div></div>
+      }
     })
 
     for (let i = 0; i < this.props.width; i++) {
@@ -111,13 +116,12 @@ class Planner extends Component {
 
     this.props.plants.forEach ((plant) => {
       plants.toChoose.push(
-        <tr key={plant.name}><td key={plant.name}
+        <tr key={plant.name}><td>{plant.name}</td><td key={plant.name}
             onDragStart = {(e) => this.onDragStart(e, plant.name)}
             draggable
             className="draggable"
-            style= {{backgroundColor: "white"}}
+            style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px', backgroundRepeat: 'no-repeat'}}
         >
-          {plant.name}
         </td></tr>
       )
     })
