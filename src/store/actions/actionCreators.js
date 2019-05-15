@@ -16,3 +16,25 @@ export const sizeSave = (dimensions) => {
     dispatch({type: actionTypes.SIZE_SAVE, dimensions: dimensions})
   }
 }
+
+export const allPlansFetched = (userId) => {
+  let url = 'http://localhost:8080/api/plans/' + userId
+  return dispatch => {
+    fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      dispatch({type: actionTypes.PLANS_FETCH, plans: json})
+    })
+  }
+}
+
+export const onePlanFetched = (planRoute) => {
+  let url = 'http://localhost:8080/api' + planRoute
+  return dispatch => {
+    fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      dispatch({type: actionTypes.PLAN_FETCH, plan: json})
+    })
+  }
+}

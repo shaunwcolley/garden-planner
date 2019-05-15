@@ -5,8 +5,10 @@ const initialState = {
   height: 0,
   cells: 0,
   plants: [],
+  plans: [],
   isAuth: false,
-  userId: null
+  userId: 1,
+  plan: {}
 }
 const cellCalc = (width,height) => {
   const cells = height * width
@@ -31,6 +33,19 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       plants: action.plants
+    }
+    case actionTypes.PLANS_FETCH:
+    return {
+      ...state,
+      plans: action.plans
+    }
+    case actionTypes.PLAN_FETCH:
+    return {
+      ...state,
+      plan: action.plan,
+      width: action.plan.width,
+      height: action.plan.height,
+      cells: cellCalc(action.plan.width,action.plan.height)
     }
     default:
     return state

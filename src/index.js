@@ -17,11 +17,12 @@ import thunk from 'redux-thunk'
 
 //Imports from custom js file components
 import BaseLayout from './components/BaseLayout'
-import {MakePlan} from './components/MakePlan'
+import MakePlan from './components/MakePlan'
 import Login from './components/Login'
 import Register from './components/Register'
 import Planner from './components/Planner'
 import PlanSize from './components/PlanSize'
+
 
 
 //Creating Redux Store with redux devtools
@@ -39,8 +40,9 @@ ReactDOM.render(
           <Route path="/make-garden" component={MakePlan} />
           <Route path="/login" component={Login} />
           <Route path="/plan-size" component={PlanSize} />
-          <Route path="/planner" component={Planner} />
+          <Route path="/plan/new" component={Planner} />
           <Route path="/register" component={Register} />
+          <Route path="/plan/:planId" component={Planner} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>

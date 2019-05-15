@@ -96,20 +96,21 @@ class Planner extends Component {
   }
 
   componentDidMount(){
+    if(this.props.match.url !== '/plan/new') {
+      this.props.onPlanFetch(this.props.match.url)
+      console.log(this.props.plan)
+    } else if (this.props.height === 0 || this.props.width === 0) {
+      this.props.history.push('/plan-size')
+    }
     this.props.onPlantsFetched()
     this.tableGenerate()
   }
 
 
   render() {
-    if (this.props.height === 0 || this.props.width === 0) {
-      this.props.history.push('/plan-size')
-    }
-
     let plants = {
       toChoose: []
     }
-
 
     this.props.plants.forEach ((plant) => {
       plants.toChoose.push(
@@ -122,6 +123,7 @@ class Planner extends Component {
         </td></tr>
       )
     })
+
     let plantedPlants = Object.values(this.state.plantsInPlan)
     let displayPlants = []
     plantedPlants.forEach((plant,index) => {
@@ -132,7 +134,7 @@ class Planner extends Component {
         displayPlants.push(display)
       }
     })
-    console.log(this.state.plantsInPlan)
+    
     return(
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
@@ -161,13 +163,15 @@ const mapStateToProps = (state) => {
     width: state.width,
     height: state.height,
     cells: state.cells,
-    plants: state.plants
+    plants: state.plants,
+    plan: state.plan
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPlantsFetched: () => dispatch(actionCreators.plantsFetched())
+    onPlantsFetched: () => dispatch(actionCreators.plantsFetched()),
+    onPlanFetch: (planRoute) => dispatch(actionCreators.onePlanFetched(planRoute))
   }
 }
 
