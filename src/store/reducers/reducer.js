@@ -4,7 +4,9 @@ const initialState = {
   width: 0,
   height: 0,
   cells: 0,
-  plants: []
+  plants: [],
+  isAuth: false,
+  userId: null
 }
 const cellCalc = (width,height) => {
   const cells = height * width
