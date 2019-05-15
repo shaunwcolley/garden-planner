@@ -132,7 +132,7 @@ class Planner extends Component {
         displayPlants.push(display)
       }
     })
-    // console.log(Object.keys(this.state.plantsInPlan) + " " + Object.values(this.state.plantsInPlan)[0])
+    console.log(this.state.plantsInPlan)
     return(
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
