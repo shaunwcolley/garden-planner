@@ -11,9 +11,8 @@ const initialState = {
 const cellCalc = (width,height) => {
   const cells = height * width
   let a = {}
-  let b = 't'
   for (let i = 1; i < (cells + 1); i++) {
-    a[b+i] = []
+    a[i] = []
   }
   return a
 }
