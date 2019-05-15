@@ -9,10 +9,7 @@ class Planner extends Component {
     this.state = {
       plantsToChoose: this.props.plants,
       plantsInPlan: this.props.cells,
-      table: '',
-      plants: {
-        inPlan: {}
-      }
+      table: ''
     }
   }
 
@@ -45,45 +42,45 @@ class Planner extends Component {
     }
   }
 
-  categoryAndTable = () => {
-
-  }
-
-
   tableGenerate = () => {
     let rows = []
-    let cellNames = Object.keys(this.props.cells)
-    let cells = cellNames.map(name => {
+    let cellNumbers = Object.keys(this.props.cells)
+    try {
+      let cells = cellNumbers.map(num => {
+        let plant = this.state.plantsInPlan[num]
+        if(Array.isArray(plant)){
+          return <div key={num} className="droppable"
+              onDragOver={(e) => this.onDragOver(e)}
+              onDrop={(e) => this.onDrop(e, num)}>
+              </div>
+        }
+        else {
+          return <div key={num} className="droppable"
+              onDragOver={(e) => this.onDragOver(e)}
+              onDrop={(e) => this.onDrop(e, num)}><div
+                  onDragStart = {(e) => this.onDragStart(e, plant.name)}
+                  draggable
+                  className="draggable"
+                  style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
+              >
+              </div></div>
+        }
+      })
 
-      let plant = this.state.plantsInPlan[name]
-      if(plant.length === 0){
-        return <div key={name} className="droppable"
-            onDragOver={(e) => this.onDragOver(e)}
-            onDrop={(e) => this.onDrop(e, name)}>
-            </div>
+      for (let i = 0; i < this.props.width; i++) {
+        rows.push([])
       }
-      else{
-        return <div key={name} className="droppable"
-            onDragOver={(e) => this.onDragOver(e)}
-            onDrop={(e) => this.onDrop(e, name)}><div
-                onDragStart = {(e) => this.onDragStart(e, plant.name)}
-                draggable
-                className="draggable"
-                style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
-            >
-            </div></div>
-      }
-    })
 
-    for (let i = 0; i < this.props.width; i++) {
-      rows.push([])
-    }
-    let count = 0
-    for(let i = 0; i < this.props.width; i++) {
-      for(let j = 0; j < this.props.height; j++) {
-        rows[i].push(cells[count])
-        count++
+      let count = 0
+      for(let i = 0; i < this.props.width; i++) {
+        for(let j = 0; j < this.props.height; j++) {
+          rows[i].push(cells[count])
+          count++
+        }
       }
+    } catch {
+      alert('Error in loading page, please go back to make a plan.')
+      this.props.history.push('/make-garden')
     }
 
     let table = rows.map((row,index) => {
@@ -125,7 +122,17 @@ class Planner extends Component {
         </td></tr>
       )
     })
-
+    let plantedPlants = Object.values(this.state.plantsInPlan)
+    let displayPlants = []
+    plantedPlants.forEach((plant,index) => {
+      if(Array.isArray(plant)){
+        console.log('nothing planted')
+      } else {
+        let display = (<li>{index + 1} - {plant.name}</li>)
+        displayPlants.push(display)
+      }
+    })
+    // console.log(Object.keys(this.state.plantsInPlan) + " " + Object.values(this.state.plantsInPlan)[0])
     return(
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
@@ -138,6 +145,9 @@ class Planner extends Component {
           </div>
           <div>
             {this.state.table}
+          </div>
+          <div>
+            <ul>{displayPlants}</ul>
           </div>
         </div>
       </div>

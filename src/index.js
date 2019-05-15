@@ -16,9 +16,10 @@ import reducer from './store/reducers/reducer'
 import thunk from 'redux-thunk'
 
 //Imports from custom js file components
-import {BaseLayout} from './components/BaseLayout'
+import BaseLayout from './components/BaseLayout'
 import {MakePlan} from './components/MakePlan'
-import {Login} from './components/Login'
+import Login from './components/Login'
+import Register from './components/Register'
 import Planner from './components/Planner'
 import PlanSize from './components/PlanSize'
 
@@ -39,6 +40,7 @@ ReactDOM.render(
           <Route path="/login" component={Login} />
           <Route path="/plan-size" component={PlanSize} />
           <Route path="/planner" component={Planner} />
+          <Route path="/register" component={Register} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>

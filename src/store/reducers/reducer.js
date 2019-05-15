@@ -4,14 +4,15 @@ const initialState = {
   width: 0,
   height: 0,
   cells: 0,
-  plants: []
+  plants: [],
+  isAuth: false,
+  userId: null
 }
 const cellCalc = (width,height) => {
   const cells = height * width
   let a = {}
-  let b = 't'
   for (let i = 1; i < (cells + 1); i++) {
-    a[b+i] = []
+    a[i] = []
   }
   return a
 }
