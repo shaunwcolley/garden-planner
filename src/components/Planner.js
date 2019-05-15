@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 class Planner extends Component {
   constructor (props) {
     super (props)
 
     this.state = {
-      plantsToChoose: [
-        {name: "Tomato", bgcolor: "red"},
-        {name: "Corn", bgcolor: "yellow"},
-        {name: "Lettuce", bgcolor: "green"}
-      ],
+      plantsToChoose: this.props.plants,
       plantsInPlan: this.props.cells,
       table: '',
       plants: {
-        inPlan: ''
+        inPlan: {}
       }
     }
   }
@@ -59,17 +56,23 @@ class Planner extends Component {
     let cells = cellNames.map(name => {
 
       let plant = this.state.plantsInPlan[name]
-
-      return <div key={name}className="droppable"
-          onDragOver={(e) => this.onDragOver(e)}
-          onDrop={(e) => this.onDrop(e, name)}><div
-              onDragStart = {(e) => this.onDragStart(e, plant.name)}
-              draggable
-              className="draggable"
-              style= {{backgroundColor: plant.bgcolor}}
-          >
-            {plant.name}
-          </div></div>
+      if(plant.length === 0){
+        return <div key={name} className="droppable"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, name)}>
+            </div>
+      }
+      else{
+        return <div key={name} className="droppable"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, name)}><div
+                onDragStart = {(e) => this.onDragStart(e, plant.name)}
+                draggable
+                className="draggable"
+                style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
+            >
+            </div></div>
+      }
     })
 
     for (let i = 0; i < this.props.width; i++) {
@@ -96,6 +99,7 @@ class Planner extends Component {
   }
 
   componentDidMount(){
+    this.props.onPlantsFetched()
     this.tableGenerate()
   }
 
@@ -110,15 +114,14 @@ class Planner extends Component {
     }
 
 
-    this.state.plantsToChoose.forEach ((plant) => {
+    this.props.plants.forEach ((plant) => {
       plants.toChoose.push(
-        <tr key={plant.name}><td key={plant.name}
+        <tr key={plant.name}><td>{plant.name}</td><td key={plant.name}
             onDragStart = {(e) => this.onDragStart(e, plant.name)}
             draggable
             className="draggable"
-            style= {{backgroundColor: plant.bgcolor}}
+            style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px', backgroundRepeat: 'no-repeat'}}
         >
-          {plant.name}
         </td></tr>
       )
     })
@@ -147,8 +150,15 @@ const mapStateToProps = (state) => {
   return {
     width: state.width,
     height: state.height,
-    cells: state.cells
+    cells: state.cells,
+    plants: state.plants
   }
 }
 
-export default connect(mapStateToProps)(Planner)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onPlantsFetched: () => dispatch(actionCreators.plantsFetched())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Planner)

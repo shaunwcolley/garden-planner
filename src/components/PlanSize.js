@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 class PlanSize extends Component {
   constructor() {
@@ -35,7 +36,7 @@ class PlanSize extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSizeSave: (dimensions) => dispatch({type: 'SIZE_SAVE', dimensions: dimensions})
+    onSizeSave: (dimensions) => dispatch(actionCreators.sizeSave(dimensions))
   }
 }
 

@@ -8,11 +8,12 @@ import * as serviceWorker from './serviceWorker';
 //CSS Import(s)
 import './Custom.css'
 
-//Import(s) from module
+//Imports from module
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './store/reducers/reducer'
+import thunk from 'redux-thunk'
 
 //Imports from custom js file components
 import {BaseLayout} from './components/BaseLayout'
@@ -22,8 +23,11 @@ import Planner from './components/Planner'
 import PlanSize from './components/PlanSize'
 
 
-//Creating Redux Store
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+//Creating Redux Store with redux devtools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer,composeEnhancers(
+    applyMiddleware(thunk)
+  ));
 
 ReactDOM.render(
   <Provider store={store}>

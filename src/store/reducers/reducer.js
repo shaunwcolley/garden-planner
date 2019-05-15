@@ -1,7 +1,10 @@
+import * as actionTypes from '../actions/actionTypes'
+
 const initialState = {
   width: 0,
   height: 0,
-  cells: 0
+  cells: 0,
+  plants: []
 }
 const cellCalc = (width,height) => {
   const cells = height * width
@@ -16,12 +19,17 @@ const cellCalc = (width,height) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case 'SIZE_SAVE' :
+    case actionTypes.SIZE_SAVE :
     return {
       ...state,
       width: action.dimensions.width,
       height: action.dimensions.height,
       cells: cellCalc(action.dimensions.width,action.dimensions.height)
+    }
+    case actionTypes.PLANTS_FETCH :
+    return {
+      ...state,
+      plants: action.plants
     }
     default:
     return state
