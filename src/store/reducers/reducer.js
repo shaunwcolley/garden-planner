@@ -47,6 +47,11 @@ const reducer = (state = initialState, action) => {
       height: action.plan.height,
       cells: cellCalc(action.plan.width,action.plan.height)
     }
+    case actionTypes.NEW_PLAN:
+    return {
+      ...state,
+      plan: null
+    }
     default:
     return state
   }

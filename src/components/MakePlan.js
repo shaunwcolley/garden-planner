@@ -10,6 +10,7 @@ class MakePlan extends Component {
 
   handleNewPlanClick = () => {
     this.props.history.push('/plan-size')
+    this.props.onNewPlan()
   }
   handleUseOldClick = (planId) => {
     let url = '/plan/' + planId
@@ -41,7 +42,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPlansFetched: (userId) => dispatch(actionCreators.allPlansFetched(userId))
+    onPlansFetched: (userId) => dispatch(actionCreators.allPlansFetched(userId)),
+    onNewPlan: () => dispatch(actionCreators.newPlan())
   }
 }
 

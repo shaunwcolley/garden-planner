@@ -32,3 +32,8 @@ export const onePlanFetched = (plan) => {
   return dispatch =>
       dispatch({type: actionTypes.PLAN_FETCH, plan: plan})
 }
+
+export const newPlan = () => {
+  return dispatch =>
+  dispatch({type: actionTypes.NEW_PLAN})
+}

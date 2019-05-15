@@ -10,8 +10,7 @@ class Planner extends Component {
       plantsInPlan: this.props.cells,
       cells: this.props.cells,
       table: '',
-      oldPlan: this.props.plan,
-      firstPlan: false
+      oldPlan: this.props.plan
     }
   }
 
@@ -52,25 +51,7 @@ class Planner extends Component {
     //console.log(cellNumbers)
     let plant = {}
     let cells = []
-    try {
-      if(this.props.plan !== null && this.state.firstPlan === false) {
-        let planCells = this.props.plan.cells
-        for(let i = planCells.length - 1; i > -1; i--){
-          let num = planCells[i].cellNum
-          let plantInfo = planCells[i].plant
-          let plot = <div key={num} className="droppable"
-              onDragOver={(e) => this.onDragOver(e)}
-              onDrop={(e) => this.onDrop(e, num)}><div
-                  onDragStart = {(e) => this.onDragStart(e, plantInfo.name)}
-                  draggable
-                  className="draggable"
-                  style= {{backgroundImage: `url(${plantInfo.companion.imageURL})`, backgroundSize: '100px 100px'}}
-              >
-              </div></div>
-          cells.push(plot)
-        }
-        this.setState({firstPlan: true})
-      } else {
+
         cells = cellNumbers.map(num => {
           plant = this.state.plantsInPlan[num]
           try{
@@ -91,7 +72,7 @@ class Planner extends Component {
                 </div>
           }
         })
-      }
+
       for (let i = 0; i < this.props.width; i++) {
         rows.push([])
       }
@@ -103,9 +84,6 @@ class Planner extends Component {
           count++
         }
       }
-    } catch {
-
-    }
 
     let table = rows.map((row,index) => {
       return (
@@ -127,11 +105,18 @@ class Planner extends Component {
       .then(json => {
         this.props.onPlanFetch(json)
       }).then(() => {
-        this.setState({
-          plantsInPlan: this.props.cells,
-          cells: this.props.cells,
-          plan: this.state.plan
-        }, () => this.tableGenerate())
+        if(this.props.plan !== null) {
+          let planCells = this.props.plan.cells
+          for(let i = planCells.length - 1; i > -1; i--){
+            let num = planCells[i].cellNum
+            let plantInfo = planCells[i].plant
+            this.setState({plantsInPlan: {
+              ...this.state.plantsInPlan,
+              [num]: plantInfo
+              }
+            },() => this.tableGenerate())
+          }
+        }
       })
     } else if (this.props.height === 0 || this.props.width === 0) {
       this.props.history.push('/make-garden')
