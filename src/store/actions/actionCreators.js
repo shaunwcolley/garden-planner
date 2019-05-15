@@ -28,13 +28,7 @@ export const allPlansFetched = (userId) => {
   }
 }
 
-export const onePlanFetched = (planRoute) => {
-  let url = 'http://localhost:8080/api' + planRoute
-  return dispatch => {
-    fetch(url)
-    .then(response => response.json())
-    .then(json => {
-      dispatch({type: actionTypes.PLAN_FETCH, plan: json})
-    })
-  }
+export const onePlanFetched = (plan) => {
+  return dispatch =>
+      dispatch({type: actionTypes.PLAN_FETCH, plan: plan})
 }

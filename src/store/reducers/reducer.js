@@ -8,7 +8,7 @@ const initialState = {
   plans: [],
   isAuth: false,
   userId: 1,
-  plan: {}
+  plan: null
 }
 const cellCalc = (width,height) => {
   const cells = height * width
