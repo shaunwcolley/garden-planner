@@ -125,6 +125,20 @@ class Planner extends Component {
     this.tableGenerate()
   }
 
+  handleSavePlanClick = () => {
+    console.log('name')
+    console.log(this.props.width)
+    console.log(this.props.height)
+    console.log(1)
+    console.log(this.state.plantsInPlan)
+    console.log('click')
+    /*let name = req.body.planName
+  let width = req.body.width
+  let height = req.body.height
+  let userId = req.body.userId
+  let plantsInPlan = Object.values(req.body.plantsInPlan)*/
+  }
+
   render() {
     let plants = {
       toChoose: []
@@ -132,13 +146,13 @@ class Planner extends Component {
 
     this.props.plants.forEach ((plant) => {
       plants.toChoose.push(
-        <tr key={plant.name}><td>{plant.name}</td><td key={plant.name}
+        <td key={plant.id}><p>{plant.name}</p><p key={plant.name}
             onDragStart = {(e) => this.onDragStart(e, plant.name)}
             draggable
             className="draggable"
             style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px', backgroundRepeat: 'no-repeat'}}
-        >
-        </td></tr>
+        ></p>
+        </td>
       )
     })
 
@@ -161,13 +175,16 @@ class Planner extends Component {
               onDragOver={(e) => this.onDragOver(e)}
               onDrop={(e)=> this.onDrop(e,null)}
               >
-              <table><tbody><tr><td className="section-header">Plants</td></tr>{plants.toChoose}</tbody></table>
+              <table><tbody><tr>{plants.toChoose}</tr></tbody></table>
           </div>
           <div>
             {this.state.table}
           </div>
           <div>
             <ul>{displayPlants}</ul>
+          </div>
+          <div>
+            <button onClick={this.handleSavePlanClick}>{this.props.match.url === "/plan/new" ? "Save" : "Update"}</button>
           </div>
         </div>
       </div>
