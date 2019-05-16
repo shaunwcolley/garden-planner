@@ -11,9 +11,9 @@ export const plantsFetched = () => {
   }
 }
 
-export const sizeSave = (dimensions) => {
+export const sizeSave = (dimensions, planName) => {
   return dispatch => {
-    dispatch({type: actionTypes.SIZE_SAVE, dimensions: dimensions})
+    dispatch({type: actionTypes.SIZE_SAVE, dimensions: dimensions, planName: planName})
   }
 }
 

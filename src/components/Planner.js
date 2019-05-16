@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as actionCreators from '../store/actions/actionCreators'
+import axios from 'axios'
 
 class Planner extends Component {
   constructor (props) {
@@ -23,24 +24,25 @@ class Planner extends Component {
     e.preventDefault()
   }
 
-  onDrop = (e, category) => {
+  onDrop = (e, category, cellId) => {
     if(category === null){
       console.log('eventually remove drop')
     } else {
       let id = e.dataTransfer.getData("id")
-      let plants = this.props.plants.filter((plant) => {
-        console.log(plant.name)
+      let newPlant = this.props.plants.find((plant) => {
         return plant.name === id
       })
-      let newPlant = plants[0]
+      newPlant.cellId = cellId
+      //loop through state, return new objects where id is same
+      console.log("on drop cell id: " + cellId)
       this.setState({
         plantsInPlan: {
           ...this.state.plantsInPlan,
           [category]: newPlant
         }
       }, () => {
-        console.log(this.state.plantsInPlan)
         this.tableGenerate()
+        console.log(this.state.plantsInPlan)
       })
     }
   }
@@ -48,42 +50,41 @@ class Planner extends Component {
   tableGenerate = () => {
     let rows = []
     let cellNumbers = Object.keys(this.props.cells)
-    //console.log(cellNumbers)
     let plant = {}
-    let cells = []
-
-        cells = cellNumbers.map(num => {
-          plant = this.state.plantsInPlan[num]
-          try{
-            // if(this.props.plan === null)
-            return <div key={num} className="droppable"
-                onDragOver={(e) => this.onDragOver(e)}
-                onDrop={(e) => this.onDrop(e, num)}><div
-                    onDragStart = {(e) => this.onDragStart(e, plant.name)}
-                    draggable
-                    className="draggable"
-                    style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
-                >
-                </div></div>
-          } catch {
-            return <div key={num} className="droppable"
-                onDragOver={(e) => this.onDragOver(e)}
-                onDrop={(e) => this.onDrop(e, num)}>
-                </div>
-          }
-        })
-
-      for (let i = 0; i < this.props.width; i++) {
-        rows.push([])
+    let cells = cellNumbers.map(num => {
+      plant = this.state.plantsInPlan[num]
+      try{
+        let cellId = plant.cellId
+        console.log("cell id from array: " + cellId)
+        return <div key={num} className="droppable"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, num, cellId)}>
+              <div
+              onDragStart = {(e) => this.onDragStart(e, plant.name)}
+              draggable
+              className="draggable"
+              style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
+              >
+              </div>
+            </div>
+      } catch {
+        return <div key={num} className="droppable"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, num, null)}>
+            </div>
       }
+    })
+    for (let i = 0; i < this.props.width; i++) {
+      rows.push([])
+    }
 
-      let count = 0
-      for(let i = 0; i < this.props.width; i++) {
-        for(let j = 0; j < this.props.height; j++) {
-          rows[i].push(cells[count])
-          count++
-        }
+    let count = 0
+    for(let i = 0; i < this.props.width; i++) {
+      for(let j = 0; j < this.props.height; j++) {
+        rows[i].push(cells[count])
+        count++
       }
+    }
 
     let table = rows.map((row,index) => {
       return (
@@ -97,25 +98,28 @@ class Planner extends Component {
     })
   }
 
+
   componentDidMount(){
     if(this.props.match.url !== '/plan/new') {
       let url = 'http://localhost:8080/api' + this.props.match.url
-      fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        this.props.onPlanFetch(json)
+      axios.get(url)
+      .then(response => {
+        this.props.onPlanFetch(response.data)
       }).then(() => {
         if(this.props.plan !== null) {
           let planCells = this.props.plan.cells
           for(let i = planCells.length - 1; i > -1; i--){
+            let cellId = planCells[i].id
             let num = planCells[i].cellNum
             let plantInfo = planCells[i].plant
+            plantInfo.cellId = cellId
             this.setState({plantsInPlan: {
               ...this.state.plantsInPlan,
               [num]: plantInfo
               }
-            },() => this.tableGenerate())
+            })
           }
+          this.tableGenerate()
         }
       })
     } else if (this.props.height === 0 || this.props.width === 0) {
@@ -126,17 +130,28 @@ class Planner extends Component {
   }
 
   handleSavePlanClick = () => {
-    console.log('name')
-    console.log(this.props.width)
-    console.log(this.props.height)
-    console.log(1)
-    console.log(this.state.plantsInPlan)
-    console.log('click')
-    /*let name = req.body.planName
-  let width = req.body.width
-  let height = req.body.height
-  let userId = req.body.userId
-  let plantsInPlan = Object.values(req.body.plantsInPlan)*/
+    axios.post("http://localhost:8080/api/save-plan", {
+      planName: this.props.planName,
+      width: this.props.width,
+      height: this.props.height,
+      userId: 1, //Need to update with userId once registration and login are set up
+      plantsInPlan: this.state.plantsInPlan
+    })
+    .then(response => {
+      if(response.data.success){
+        console.log(response.data.message)
+      } else {
+        console.log(response.data.message)
+      }
+    })
+  }
+
+  handleUpdatePlanClick = () => {
+    axios.post("http://localhost:8080/api/update-plan", {
+      plantsInPlan: this.state.plantsInPlan
+    }).then(response => {
+      console.log(response.data.message)
+    })
   }
 
   render() {
@@ -168,6 +183,7 @@ class Planner extends Component {
     })
 
     return(
+
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
         <div className="drag-body">
@@ -178,13 +194,16 @@ class Planner extends Component {
               <table><tbody><tr>{plants.toChoose}</tr></tbody></table>
           </div>
           <div>
+            <h4>{this.props.planName}</h4>
+          </div>
+          <div>
             {this.state.table}
           </div>
           <div>
             <ul>{displayPlants}</ul>
           </div>
           <div>
-            <button onClick={this.handleSavePlanClick}>{this.props.match.url === "/plan/new" ? "Save" : "Update"}</button>
+            <button onClick={this.props.match.url === "/plan/new" ? () => this.handleSavePlanClick() : () => this.handleUpdatePlanClick()}>{this.props.match.url === "/plan/new" ? "Save" : "Update"}</button>
           </div>
         </div>
       </div>
@@ -198,7 +217,8 @@ const mapStateToProps = (state) => {
     height: state.height,
     cells: state.cells,
     plants: state.plants,
-    plan: state.plan
+    plan: state.plan,
+    planName: state.planName
   }
 }
 

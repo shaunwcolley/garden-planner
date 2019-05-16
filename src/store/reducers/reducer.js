@@ -8,7 +8,8 @@ const initialState = {
   plans: [],
   isAuth: false,
   userId: 1,
-  plan: null
+  plan: null,
+  planName: ''
 }
 const cellCalc = (width,height) => {
   const cells = height * width
@@ -25,6 +26,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SIZE_SAVE :
     return {
       ...state,
+      planName: action.planName,
       width: action.dimensions.width,
       height: action.dimensions.height,
       cells: cellCalc(action.dimensions.width,action.dimensions.height)
@@ -43,6 +45,7 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       plan: action.plan,
+      planName: action.plan.name,
       width: action.plan.width,
       height: action.plan.height,
       cells: cellCalc(action.plan.width,action.plan.height)
