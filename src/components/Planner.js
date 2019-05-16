@@ -26,23 +26,25 @@ class Planner extends Component {
 
   onDrop = (e, category, cellId) => {
     if(category === null){
-      console.log('eventually remove drop')
     } else {
       let id = e.dataTransfer.getData("id")
       let newPlant = this.props.plants.find((plant) => {
         return plant.name === id
       })
-      newPlant.cellId = cellId
-      //loop through state, return new objects where id is same
-      console.log("on drop cell id: " + cellId)
-      this.setState({
-        plantsInPlan: {
-          ...this.state.plantsInPlan,
-          [category]: newPlant
+      let p = { ...newPlant }
+      p['cellId'] = cellId
+      let newPlants = {}
+      Object.values(this.state.plantsInPlan).forEach((plant, index) => {
+        if(cellId === plant.cellId) {
+          newPlants[index+1] = p
+        } else {
+          newPlants[index+1] = plant
         }
+      })
+      this.setState({
+        plantsInPlan: newPlants
       }, () => {
         this.tableGenerate()
-        console.log(this.state.plantsInPlan)
       })
     }
   }
@@ -55,8 +57,7 @@ class Planner extends Component {
       plant = this.state.plantsInPlan[num]
       try{
         let cellId = plant.cellId
-        console.log("cell id from array: " + cellId)
-        return <div key={num} className="droppable"
+        return <div key={cellId} className="droppable"
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e, num, cellId)}>
               <div
@@ -155,6 +156,10 @@ class Planner extends Component {
   }
 
   render() {
+    if (this.state.plantsInPlan == null) {
+      return null
+    }
+
     let plants = {
       toChoose: []
     }
@@ -183,6 +188,7 @@ class Planner extends Component {
     })
 
     return(
+
 
       <div className="container-drag">
         <h3 className="header-plant">Choose a plant:</h3>
