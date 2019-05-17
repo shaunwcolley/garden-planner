@@ -161,8 +161,10 @@ class Planner extends Component {
     .then(response => {
       if(response.data.success){
         console.log(response.data.message)
+        this.props.history.push('/make-garden')
       } else {
         console.log(response.data.message)
+        this.props.history.push('/make-garden')
       }
     })
   }
@@ -172,6 +174,7 @@ class Planner extends Component {
       plantsInPlan: this.state.plantsInPlan
     }).then(response => {
       console.log(response.data.message)
+      this.props.history.push('/make-garden')
     })
   }
 

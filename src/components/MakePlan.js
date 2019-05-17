@@ -20,7 +20,7 @@ class MakePlan extends Component {
 
   render(){
     let plans = this.props.plans.map(plan => {
-      return <tr key={plan.id}><td>{plan.name}</td> <td><button className="view-btn" onClick={() => this.handleUseOldClick(plan.id)}>View</button></td></tr>
+      return <tr key={plan.id}><td>{plan.name}</td><td><button className="view-btn" onClick={() => this.handleUseOldClick(plan.id)}>View</button></td></tr>
     })
 
     return(
