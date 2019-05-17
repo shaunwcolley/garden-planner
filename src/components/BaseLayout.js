@@ -11,14 +11,13 @@ export class Header extends Component {
     this.props.onSignOut()
     this.props.history.push('/login')
   }
-
+  /*{!this.props.isAuthenticated ? <div><NavLink to="/register" className="navLink">Register</NavLink></div> : null}
+  {!this.props.isAuthenticated ? <div><NavLink to="/login" className="navLink">Login</NavLink></div> : null}*/
   render() {
     return (
       <div className="header">
         <div><NavLink to='/' className="navLink">Home</NavLink></div>
         <div className="makeGardenLink"><NavLink to='/make-garden' className="navLink">Make a Plan</NavLink></div>
-        {!this.props.isAuthenticated ? <div><NavLink to="/register" className="navLink">Register</NavLink></div> : null}
-        {!this.props.isAuthenticated ? <div><NavLink to="/login" className="navLink">Login</NavLink></div> : null}
         {this.props.isAuthenticated ? <div className="navLink"> Profile </div> : null }
         {this.props.isAuthenticated ? <button className="navLink" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
       </div>
