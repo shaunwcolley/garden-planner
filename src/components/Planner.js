@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as actionCreators from '../store/actions/actionCreators'
 import axios from 'axios'
+import "../css/Planner.css"
 
 class Planner extends Component {
   constructor (props) {
@@ -32,17 +33,15 @@ class Planner extends Component {
         return plant.name === id
       })
       let p = { ...newPlant }
-      p['cellId'] = cellId
-      let newPlants = {}
-      Object.values(this.state.plantsInPlan).forEach((plant, index) => {
-        if(cellId === plant.cellId) {
-          newPlants[index+1] = p
-        } else {
-          newPlants[index+1] = plant
-        }
-      })
+      if(this.props.match.url !== '/plan/new') {
+        p['cellId'] = cellId
+      }
+      console.log(p)
       this.setState({
-        plantsInPlan: newPlants
+        plantsInPlan: {
+          ...this.state.plantsInPlan,
+        [category]: p
+      }
       }, () => {
         this.tableGenerate()
       })
@@ -60,9 +59,10 @@ class Planner extends Component {
         return <div key={cellId} className="droppable"
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e, num, cellId)}>
+              <div key={num}>
+              {num}
+              </div>
               <div
-              onDragStart = {(e) => this.onDragStart(e, plant.name)}
-              draggable
               className="draggable"
               style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
               >
@@ -72,6 +72,9 @@ class Planner extends Component {
         return <div key={num} className="droppable"
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e, num, null)}>
+            <div>
+            </div>
+            {num}
             </div>
       }
     })
@@ -113,10 +116,27 @@ class Planner extends Component {
             let cellId = planCells[i].id
             let num = planCells[i].cellNum
             let plantInfo = planCells[i].plant
-            plantInfo.cellId = cellId
+            //console.log(planCells[i])
+            let nullPlant = ''
+            let plantStore = ''
+            if(plantInfo){
+              plantInfo.cellId = cellId
+            } else{
+              nullPlant = {
+                cellId: cellId,
+                companion: {
+                  imageURL: null
+                }
+              }
+            }
+            if (plantInfo) {
+              plantStore = { ...plantInfo }
+            } else {
+              plantStore = { ...nullPlant }
+            }
             this.setState({plantsInPlan: {
               ...this.state.plantsInPlan,
-              [num]: plantInfo
+              [num]: plantStore
               }
             })
           }
@@ -182,8 +202,10 @@ class Planner extends Component {
       if(Array.isArray(plant) || plant === undefined){
         console.log('nothing planted')
       } else {
-        let display = (<li key={index+1}>{index + 1} - {plant.name}</li>)
-        displayPlants.push(display)
+        if(plant.name) {
+          let display = (<li key={index+1}>{index + 1} - {plant.name} - Earliest Harvest: {plant.firstHarvestDate} days</li>)
+          displayPlants.push(display)
+        }
       }
     })
 
@@ -202,7 +224,7 @@ class Planner extends Component {
           <div>
             <h4>{this.props.planName}</h4>
           </div>
-          <div>
+          <div className="plant-table">
             {this.state.table}
           </div>
           <div>

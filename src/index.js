@@ -6,7 +6,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 //CSS Import(s)
-import './Custom.css'
+import './css/Custom.css'
 
 //Imports from module
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
