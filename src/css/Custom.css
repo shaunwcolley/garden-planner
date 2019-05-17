@@ -18,7 +18,7 @@ ul {
   color: white;
   margin-bottom: .5rem;
   padding-bottom: 0;
-  height: 4.5rem;
+  height: 3.5rem;
   align-items: center;
 }
 
@@ -58,14 +58,10 @@ ul {
   text-decoration: none;
 }
 
-.add-book {
-  height: 20rem;
-}
 div .makeGardenLink {
   display: flex;
   margin-left: auto;
 }
-
 
 .hello {
   width: 40px;
@@ -97,13 +93,17 @@ div .makeGardenLink {
 }
 
 .droppable {
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 120px;
-  border: 1px solid;
+  border: 1.5px ridge #634214;
 }
 
 .draggable {
+  background-position: center;
   width: 100px;
   height: 100px;
   margin: 5px auto;

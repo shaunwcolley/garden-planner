@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as actionCreators from '../store/actions/actionCreators'
+import "../css/MakePlan.css"
 
 class MakePlan extends Component {
 
@@ -19,15 +20,15 @@ class MakePlan extends Component {
 
   render(){
     let plans = this.props.plans.map(plan => {
-      return <li key={plan.id}>{plan.name} <button onClick={() => this.handleUseOldClick(plan.id)}>View</button></li>
+      return <tr key={plan.id}><td>{plan.name}</td> <td><button className="view-btn" onClick={() => this.handleUseOldClick(plan.id)}>View</button></td></tr>
     })
 
     return(
-      <div>
-        Make a Plan:
-        <p><button onClick={this.handleNewPlanClick}>Make New Plan</button></p>
-        <p>Use Existing Plan:</p>
-        <ul>{plans}</ul>
+      <div className="make-plan-body">
+        <h4>Make a Plan:</h4>
+        <p><button className="new-btn" onClick={this.handleNewPlanClick}>Make New Plan</button></p>
+        <h4>Use Existing Plan:</h4>
+        <table className="make-plan-table"><tbody>{plans}</tbody></table>
       </div>
     )
   }

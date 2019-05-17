@@ -64,7 +64,7 @@ class Planner extends Component {
               </div>
               <div
               className="draggable"
-              style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '100px 100px'}}
+              style= {{backgroundImage: `url(${plant.companion.imageURL})`, backgroundSize: '90px 90px', backgroundRepeat: 'no-repeat'}}
               >
               </div>
             </div>
@@ -203,7 +203,13 @@ class Planner extends Component {
         console.log('nothing planted')
       } else {
         if(plant.name) {
-          let display = (<li key={index+1}>{index + 1} - {plant.name} - Earliest Harvest: {plant.firstHarvestDate} days</li>)
+          console.log(plant)
+          let display = (<tr key={index+1}>
+            <td>{index + 1}</td>
+            <td>{plant.name}</td>
+            <td> {plant.firstHarvestDate}</td>
+            <td> - </td>
+            <td>{plant.lastHarvestDate}</td></tr>)
           displayPlants.push(display)
         }
       }
@@ -228,10 +234,17 @@ class Planner extends Component {
             {this.state.table}
           </div>
           <div>
-            <ul>{displayPlants}</ul>
+            <table className="plant-info-table"><tbody><tr>
+            <th>Plot</th>
+            <th>Plant</th>
+            <th colSpan="3">Estimated Days Until Harvest</th>
+            </tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            {displayPlants}
+            </tbody></table>
           </div>
           <div>
-            <button onClick={this.props.match.url === "/plan/new" ? () => this.handleSavePlanClick() : () => this.handleUpdatePlanClick()}>{this.props.match.url === "/plan/new" ? "Save" : "Update"}</button>
+            <button className="save-button" onClick={this.props.match.url === "/plan/new" ? () => this.handleSavePlanClick() : () => this.handleUpdatePlanClick()}><h4>{this.props.match.url === "/plan/new" ? "Save Plan" : "Update Plan"}</h4></button>
           </div>
         </div>
       </div>

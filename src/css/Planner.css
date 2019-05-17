@@ -2,7 +2,53 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   width: 100%;
   height: 25rem;
-  overflow: scroll;
+  overflow: auto;
+}
+.plant-table::before {
+  opacity: .3;
+  z-index: -2;
+  background-image: url("https://www.goodfreephotos.com/cache/other-photos/backgrounds/green-grass-background.jpg");
+  width: 90%;
+  height: 25rem;
+  background-size: cover;
+  position: absolute;
+  display: flex;
+  content: "";
+}
+.plant-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.plant-info-table {
+  border-collapse: collapse;
+}
+.plant-info-table th {
+  border-bottom: 1px solid black;
+}
+.save-button {
+  color: white;
+  background-color: skyblue;
+  border: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.save-button:hover {
+  color: black;
+  background-color: white;
+  border: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
