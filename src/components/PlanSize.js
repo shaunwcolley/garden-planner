@@ -8,6 +8,7 @@ class PlanSize extends Component {
     this.state = {
       width: 4,
       height: 10,
+      planName: ''
     }
   }
   handleNumberChange = (e) => {
@@ -15,15 +16,23 @@ class PlanSize extends Component {
       [e.target.name]: parseInt(e.target.value)
     })
   }
+  handleTextBoxChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
   handleSaveSizeClick = () => {
     let dimensions = this.state
-    this.props.onSizeSave(dimensions)
-    this.props.history.push('/planner')
+    this.props.onSizeSave(dimensions, this.state.planName)
+    this.props.history.push('/plan/new')
   }
   render() {
     return(
       <div>
+        <p>
+        <input type="text" name="planName" onChange={this.handleTextBoxChange} placeholder="Garden Plan Name" />
+        </p>
         <p>
         <input type="number" name="width" onChange={this.handleNumberChange} step="1" placeholder="width" /> feet by
         <input type="number" name="height" onChange={this.handleNumberChange} step="1" placeholder="height" /> feet
@@ -36,7 +45,7 @@ class PlanSize extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSizeSave: (dimensions) => dispatch(actionCreators.sizeSave(dimensions))
+    onSizeSave: (dimensions, planName) => dispatch(actionCreators.sizeSave(dimensions, planName))
   }
 }
 
