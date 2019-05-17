@@ -1,0 +1,33 @@
+.plan-size-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
+}
+
+.size-btn {
+  font-size: 1rem;
+  background-color: white;
+  border: none;
+  color: navy;
+  font-weight: bold;
+}
+.size-btn:hover {
+  font-size: 1rem;
+  color: skyblue;
+  border-color: white;
+}
+.number-input {
+  width: 37px;
+}
+.size-input-p {
+  margin-bottom: 2rem;
+}
+.plan-size-body p {
+  display: flex;
+  align-items: center;
+}
+.plan-name-input {
+  height: 1rem;
+}

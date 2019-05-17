@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as actionCreators from '../store/actions/actionCreators'
+import "../css/PlanSize.css"
 
 class PlanSize extends Component {
   constructor() {
@@ -29,15 +30,16 @@ class PlanSize extends Component {
   }
   render() {
     return(
-      <div>
+      <div className="plan-size-body">
         <p>
-        <input type="text" name="planName" onChange={this.handleTextBoxChange} placeholder="Garden Plan Name" />
+        <h4>Garden Name:&nbsp;</h4>
+        <input className="plan-name-input" type="text" name="planName" onChange={this.handleTextBoxChange} placeholder="Awesome Garden Map" />
         </p>
-        <p>
-        <input type="number" name="width" onChange={this.handleNumberChange} step="1" placeholder="width" /> feet by
-        <input type="number" name="height" onChange={this.handleNumberChange} step="1" placeholder="height" /> feet
+        <p className="size-input-p">
+        <input className="number-input" type="number" name="width" onChange={this.handleNumberChange} step="1" placeholder="height" /> ' by&nbsp;
+        <input className="number-input" type="number" name="height" onChange={this.handleNumberChange} step="1" placeholder="width" /> '
         </p>
-        <button onClick={this.handleSaveSizeClick}>Submit</button>
+        <button className="size-btn" onClick={this.handleSaveSizeClick}>Submit</button>
       </div>
     )
   }

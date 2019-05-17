@@ -1,0 +1,42 @@
+.make-plan-body {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.make-plan-table {
+  border-collapse: collapse;
+}
+.make-plan-table td {
+  border-bottom: 1px solid black;
+  padding: .5rem;
+  padding-top: 1rem;
+}
+.make-plan-table tr:last-child td {
+  border: none;
+  padding-bottom: 7rem;
+}
+.view-btn {
+  font-size: 1rem;
+  background-color: white;
+  border: none;
+  color: navy;
+  font-weight: bold;
+}
+.view-btn:hover {
+  font-size: 1rem;
+  color: skyblue;
+  border-color: white;
+}
+
+.new-btn {
+  font-size: 1rem;
+  background-color: white;
+  border-color: navy;
+  color: navy;
+  font-weight: bold;
+}
+.new-btn:hover {
+  font-size: 1rem;
+  color: skyblue;
+  border-color: white;
+}
