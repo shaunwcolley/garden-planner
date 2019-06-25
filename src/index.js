@@ -9,21 +9,24 @@ import * as serviceWorker from './serviceWorker';
 import './css/Custom.css'
 
 //Imports from module
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import { createStore, applyMiddleware, compose } from 'redux'
-import { Provider } from 'react-redux'
-import reducer from './store/reducers/reducer'
-import thunk from 'redux-thunk'
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './store/reducers/reducer';
+import thunk from 'redux-thunk';
 
 //Imports from custom js file components
-import BaseLayout from './components/BaseLayout'
-import MakePlan from './components/MakePlan'
-import Login from './components/Login'
-import Register from './components/Register'
-import Planner from './components/Planner'
-import PlanSize from './components/PlanSize'
+import BaseLayout from './components/BaseLayout';
+import MakePlan from './components/MakePlan';
+import Login from './components/Login';
+import Register from './components/Register';
+import Planner from './components/Planner';
+import PlanSize from './components/PlanSize';
+import requireAuth from './components/requireAuth';
 
-
+// Importing and set axios header for authorization on serviceWorker
+import { setAuthHeader } from './utils/authenticate';
+setAuthHeader(localStorage.getItem('jsonwebtoken'));
 
 //Creating Redux Store with redux devtools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -37,12 +40,12 @@ ReactDOM.render(
       <BaseLayout>
         <Switch>
           <Route path="/" exact component={App} />
-          <Route path="/make-garden" component={MakePlan} />
+          <Route path="/make-garden" component={requireAuth(MakePlan)} />
           <Route path="/login" component={Login} />
-          <Route path="/plan-size" component={PlanSize} />
-          <Route path="/plan/new" component={Planner} />
+          <Route path="/plan-size" component={requireAuth(PlanSize)} />
+          <Route path="/plan/new" component={requireAuth(Planner)} />
           <Route path="/register" component={Register} />
-          <Route path="/plan/:planId" component={Planner} />
+          <Route path="/plan/:planId" component={requireAuth(Planner)} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>

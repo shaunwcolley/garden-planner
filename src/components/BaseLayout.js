@@ -7,7 +7,7 @@ import * as actionTypes from '../store/actions/actionTypes'
 export class Header extends Component {
 
   handleSignOutClick = () => {
-    //localStorage.removeItem('jsonwebtoken')
+    localStorage.removeItem('jsonwebtoken');
     this.props.onSignOut()
     this.props.history.push('/login')
   }

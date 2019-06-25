@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../css/Login.css';
+import { setAuthHeader } from '../utils/authenticate.js';
 
 class Login extends Component {
   constructor(){
@@ -23,9 +24,21 @@ class Login extends Component {
     axios.post('http://localhost:8080/login', this.state)
     .then(response => {
       if (response.data.success){
-        console.log(response.data)
+        const token = response.data.token;
+        const userId = response.data.userId;
+        localStorage.setItem('jsonwebtoken', token);
+        this.props.onSignIn(token, userId);
+        setAuthHeader(token);
+        this.props.history.push('/');
+        return
       }
-    })
+      if(!response.data.success) {
+        this.setState({
+          ...this.state,
+          message: response.data.message,
+        });
+      };
+    }).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }))
   }
 
   render() {
