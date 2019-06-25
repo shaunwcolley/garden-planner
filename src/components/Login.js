@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
-import '../css/Login.css'
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import '../css/Login.css';
 
 class Login extends Component {
   constructor(){
     super()
     this.state = {
-      username: "",
-      password: "",
+      email: "",
+      pass: "",
     }
   }
 
@@ -18,14 +20,19 @@ class Login extends Component {
   }
 
   handleLoginClick = () => {
-    console.log(this.state)
+    axios.post('http://localhost:8080/login', this.state)
+    .then(response => {
+      if (response.data.success){
+        console.log(response.data)
+      }
+    })
   }
 
   render() {
     return(
       <div className="login-body">
-        <input type='text' onChange={this.handleTextBoxChange} placeholder="username" name="username"/>
-        <input type='password' onChange={this.handleTextBoxChange} placeholder="password" name="password"/>
+        <input type='text' onChange={this.handleTextBoxChange} placeholder="email" name="email"/>
+        <input type='password' onChange={this.handleTextBoxChange} placeholder="password" name="pass"/>
         <button className="login-btn" onClick={this.handleLoginClick}>Login</button>
         <NavLink to='/register'>Not a member? Register now to save your garden plans.</NavLink>
       </div>
@@ -33,4 +40,10 @@ class Login extends Component {
   }
 }
 
-export default Login
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSignIn: (token, userId) => dispatch({ type: 'SIGN_IN', token, userId}),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login)
