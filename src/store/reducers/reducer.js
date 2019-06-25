@@ -7,7 +7,7 @@ const initialState = {
   plants: [],
   plans: [],
   isAuth: false,
-  userId: 1,
+  userId: null,
   plan: null,
   planName: ''
 }
@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
       ...state,
       plans: action.plans
     }
-    case actionTypes.PLAN_FETCH:
+    case actionTypes.PLAN_FETCH :
     return {
       ...state,
       plan: action.plan,
@@ -50,10 +50,22 @@ const reducer = (state = initialState, action) => {
       height: action.plan.height,
       cells: cellCalc(action.plan.width,action.plan.height)
     }
-    case actionTypes.NEW_PLAN:
+    case actionTypes.NEW_PLAN :
     return {
       ...state,
-      plan: null
+      plan: null,
+    }
+    case actionTypes.SIGN_IN :
+    return {
+      ...state,
+      isAuth: action.token != null ? true : false,
+      userId: action.userId,
+    }
+    case actionTypes.SIGN_OUT :
+    return {
+      ...state,
+      isAuth: false,
+      userId: null,
     }
     default:
     return state
