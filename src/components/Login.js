@@ -11,6 +11,7 @@ class Login extends Component {
     this.state = {
       email: "",
       pass: "",
+      message: null,
     }
   }
 
@@ -38,7 +39,11 @@ class Login extends Component {
           message: response.data.message,
         });
       };
-    }).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }))
+    }).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }));
+    this.setState({
+      ...this.state,
+      message: "..."
+    })
   }
 
   render() {
@@ -47,6 +52,7 @@ class Login extends Component {
         <input type='text' onChange={this.handleTextBoxChange} placeholder="email" name="email"/>
         <input type='password' onChange={this.handleTextBoxChange} placeholder="password" name="pass"/>
         <button className="login-btn" onClick={this.handleLoginClick}>Login</button>
+        <h4>{this.state.message}</h4>
         <NavLink to='/register'>Not a member? Register now to save your garden plans.</NavLink>
       </div>
     )
