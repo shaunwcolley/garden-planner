@@ -12,13 +12,14 @@ export class Header extends Component {
     this.props.history.push('/login')
   }
   render() {
+    const profileLink = "/profile/" + this.props.userId
     return (
       <div className="header">
         <div><NavLink to='/' className="navLink">Home</NavLink></div>
         <div className="makeGardenLink"><NavLink to='/make-garden' className="navLink">Make a Plan</NavLink></div>
         {!this.props.isAuthenticated ? <div><NavLink to="/register" className="navLink">Register</NavLink></div> : null}
         {!this.props.isAuthenticated ? <div><NavLink to="/login" className="navLink">Login</NavLink></div> : null}
-        {this.props.isAuthenticated ? <div className="navLink"> Profile </div> : null }
+        {this.props.isAuthenticated ? <div> <NavLink to={profileLink} className="navLink"> Profile </NavLink></div> : null }
         {this.props.isAuthenticated ? <button className="navLink" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
       </div>
     )
@@ -40,7 +41,7 @@ class BaseLayout extends Component {
   render(){
     return (
       <div className="body">
-        <Header isAuthenticated={this.props.isAuth} onSignOut={() => this.props.onSignOut()} history={this.props.history}/>
+        <Header isAuthenticated={this.props.isAuth} onSignOut={() => this.props.onSignOut()} history={this.props.history} userId={this.props.userId}/>
           {this.props.children}
         <Footer />
       </div>

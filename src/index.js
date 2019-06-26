@@ -22,6 +22,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Planner from './components/Planner';
 import PlanSize from './components/PlanSize';
+import Profile from './components/Profile';
 import requireAuth from './components/requireAuth';
 
 // Importing and set axios header for authorization on serviceWorker
@@ -47,6 +48,7 @@ ReactDOM.render(
           <Route path="/plan/new" component={requireAuth(Planner)} />
           <Route path="/register" component={Register} />
           <Route path="/plan/:planId" component={requireAuth(Planner)} />
+          <Route path="/profile/:userId" component={requireAuth(Profile)} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>
