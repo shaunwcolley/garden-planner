@@ -26,13 +26,14 @@ import requireAuth from './components/requireAuth';
 
 // Importing and set axios header for authorization on serviceWorker
 import { setAuthHeader } from './utils/authenticate';
-setAuthHeader(localStorage.getItem('jsonwebtoken'));
 
 //Creating Redux Store with redux devtools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(
     applyMiddleware(thunk)
   ));
+
+setAuthHeader(localStorage.getItem('jsonwebtoken'));
 
 ReactDOM.render(
   <Provider store={store}>

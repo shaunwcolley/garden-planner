@@ -36,7 +36,6 @@ class Planner extends Component {
       if(this.props.match.url !== '/plan/new') {
         p['cellId'] = cellId
       }
-      console.log(p)
       this.setState({
         plantsInPlan: {
           ...this.state.plantsInPlan,
@@ -155,7 +154,7 @@ class Planner extends Component {
       planName: this.props.planName,
       width: this.props.width,
       height: this.props.height,
-      userId: 1, //Need to update with userId once registration and login are set up
+      userId: this.props.userId,
       plantsInPlan: this.state.plantsInPlan
     })
     .then(response => {
@@ -206,7 +205,6 @@ class Planner extends Component {
         console.log('nothing planted')
       } else {
         if(plant.name) {
-          console.log(plant)
           let display = (<tr key={index+1}>
             <td>{index + 1}</td>
             <td>{plant.name}</td>
@@ -262,7 +260,8 @@ const mapStateToProps = (state) => {
     cells: state.cells,
     plants: state.plants,
     plan: state.plan,
-    planName: state.planName
+    planName: state.planName,
+    userId: state.userId,
   }
 }
 
