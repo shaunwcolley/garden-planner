@@ -32,7 +32,7 @@ class Profile extends Component {
       <li> Favorite Vegetable: {favVeg}</li>
       <li>Zip Code: {zipCode}</li>
       </ul>
-      <button onClick={() => this.handleUpdateProfileClick(id)}></button>
+      <button onClick={() => this.handleUpdateProfileClick(id)}>Update Profile</button>
       </Fragment>;
     }
     return <Fragment><h3>Profile</h3>

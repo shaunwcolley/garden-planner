@@ -6,8 +6,8 @@ const initialState = {
   cells: 0,
   plants: [],
   plans: [],
-  isAuth: true,
-  userId: 5,
+  isAuth: false,
+  userId: null,
   plan: null,
   planName: ''
 }
