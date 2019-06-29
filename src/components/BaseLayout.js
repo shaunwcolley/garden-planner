@@ -20,7 +20,7 @@ export class Header extends Component {
         {!this.props.isAuthenticated ? <div><NavLink to="/register" className="navLink">Register</NavLink></div> : null}
         {!this.props.isAuthenticated ? <div><NavLink to="/login" className="navLink">Login</NavLink></div> : null}
         {this.props.isAuthenticated ? <div> <NavLink to={profileLink} className="navLink"> Profile </NavLink></div> : null }
-        {this.props.isAuthenticated ? <button className="navLink" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
+        {this.props.isAuthenticated ? <button className="navLinkButton" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
       </div>
     )
   }
