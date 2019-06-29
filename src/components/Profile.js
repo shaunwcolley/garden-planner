@@ -41,7 +41,7 @@ class Profile extends Component {
       <button onClick={() => this.handleViewUpdateClick()}>Update Profile</button>
       </div>
       return <Fragment>
-      {!this.state.update ? profileDisplay : <div><button onClick={() => this.handleViewUpdateClick()}>Back</button><UpdateProfile user={this.state}></UpdateProfile></div>}
+      {!this.state.update ? profileDisplay : <div><button onClick={() => this.handleViewUpdateClick()}>Back</button><UpdateProfile changeDisplay={this.handleViewUpdateClick} history={this.props.history} user={this.state}></UpdateProfile></div>}
       </Fragment>;
     }
     return <Fragment><h3>Profile</h3>
