@@ -3,21 +3,25 @@ import UpdateProfile from './UpdateProfile';
 import axios from 'axios';
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       user: false,
       update: false,
+      url: 'http://localhost:8080/api' + this.props.match.url,
     };
   };
 
-  componentDidMount(){
-    let url = 'http://localhost:8080/api' + this.props.match.url;
-    axios.get(url)
+  userFetch = () => {
+    axios.get(this.state.url)
     .then(response => {
       const { email, id, firstName, lastName, favVeg, zipCode } = response.data
       this.setState({ user: true, email, id, firstName, lastName, favVeg, zipCode });
     });
+  }
+
+  componentDidMount(){
+    this.userFetch();
   };
 
   handleViewUpdateClick = () => {
@@ -41,7 +45,7 @@ class Profile extends Component {
       <button onClick={() => this.handleViewUpdateClick()}>Update Profile</button>
       </div>
       return <Fragment>
-      {!this.state.update ? profileDisplay : <div><button onClick={() => this.handleViewUpdateClick()}>Back</button><UpdateProfile changeDisplay={this.handleViewUpdateClick} history={this.props.history} user={this.state}></UpdateProfile></div>}
+      {!this.state.update ? profileDisplay : <div><button onClick={() => this.handleViewUpdateClick()}>Back</button><UpdateProfile userFetch={this.userFetch} changeDisplay={this.handleViewUpdateClick} history={this.props.history} user={this.state}></UpdateProfile></div>}
       </Fragment>;
     }
     return <Fragment><h3>Profile</h3>

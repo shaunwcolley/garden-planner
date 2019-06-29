@@ -21,6 +21,7 @@ class UpdateProfile extends Component {
         console.log(response.data);
         alert('User info was updated');
         this.props.changeDisplay();
+        this.props.userFetch();
       }
     })
   }
@@ -30,9 +31,9 @@ class UpdateProfile extends Component {
       const profileDisplay = <div>
       <h3>Profile</h3>
       <ul>
+      <li>Email: {email}</li>
       <li>First Name: <input name="firstName" type="text" onChange={this.handleTextBoxChange} placeholder={firstName} /></li>
       <li>Last Name: <input name="lastName" type="text" onChange={this.handleTextBoxChange} placeholder={lastName} /></li>
-      <li>Email: <input name="email" type="text" onChange={this.handleTextBoxChange} placeholder={email}/></li>
       <li> Favorite Vegetable: <input name="favVeg" type="text" onChange={this.handleTextBoxChange} placeholder={favVeg} /></li>
       <li>Zip Code: <input name="zipCode" type="number" onChange={this.handleTextBoxChange} placeholder={zipCode}/></li>
       </ul>
