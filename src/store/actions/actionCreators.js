@@ -22,7 +22,6 @@ export const allPlansFetched = (userId) => {
   return dispatch => {
     axios.get(url)
     .then(response => {
-      console.log(response)
       dispatch({type: actionTypes.PLANS_FETCH, plans: response.data})
     })
   }

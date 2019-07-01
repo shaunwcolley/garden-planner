@@ -24,3 +24,28 @@
   content: "";
   margin-top: 30rem;
 }
+
+.dash-container {
+  display: grid;
+  grid-template-columns: 33% auto;
+  grid-template-rows: 25rem 25rem;
+}
+
+.dash-plans {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  align-self: center;
+}
+.dash-profile {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+  align-self: center;
+}
+.dash-calendar {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: center;
+  align-self: center;
+}

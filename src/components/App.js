@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import '../css/App.css';
 
@@ -13,7 +13,11 @@ class App extends Component {
         </div>
       )
     }
-    return <div><h3>Dashboard will go here.</h3></div>
+    return <div className="dash-container">
+            <div className="dash-plans">Plans</div>
+            <div className="dash-profile">Profile</div>
+            <div className="dash-calendar">Calendar</div>
+          </div>
   }
 }
 
