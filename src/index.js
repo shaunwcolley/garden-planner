@@ -24,6 +24,7 @@ import Planner from './components/Planner';
 import PlanSize from './components/PlanSize';
 import Profile from './components/Profile';
 import UpdateProfile from './components/UpdateProfile';
+import Calendar from './components/Calendar';
 import requireAuth from './components/requireAuth';
 
 // Importing and set axios header for authorization on serviceWorker
@@ -51,6 +52,7 @@ ReactDOM.render(
           <Route path="/plan/:planId" component={requireAuth(Planner)} />
           <Route path="/profile/:userId" component={requireAuth(Profile)} />
           <Route path="/update/profile/user/:userId" component={requireAuth(UpdateProfile)} />
+          <Route path="/calendar/:userId" component={requireAuth(Calendar)} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>
