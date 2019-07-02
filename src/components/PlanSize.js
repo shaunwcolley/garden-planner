@@ -31,14 +31,14 @@ class PlanSize extends Component {
   render() {
     return(
       <div className="plan-size-body">
-        <p>
+        <div>
         <h4>Garden Name:&nbsp;</h4>
         <input className="plan-name-input" type="text" name="planName" onChange={this.handleTextBoxChange} placeholder="Awesome Garden Map" />
-        </p>
-        <p className="size-input-p">
+        </div>
+        <div className="size-input-p">
         <input className="number-input" type="number" name="width" onChange={this.handleNumberChange} step="1" placeholder="height" /> ' by&nbsp;
         <input className="number-input" type="number" name="height" onChange={this.handleNumberChange} step="1" placeholder="width" /> '
-        </p>
+        </div>
         <button className="size-btn" onClick={this.handleSaveSizeClick}>Submit</button>
       </div>
     )
