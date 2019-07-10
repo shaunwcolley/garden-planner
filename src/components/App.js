@@ -20,7 +20,7 @@ class App extends Component {
     return <div className="dash-container">
             <div className="dash-plans"><NavLink to="/make-garden">Plans</NavLink></div>
             <div className="dash-profile"><NavLink to={profileLink}>Profile</NavLink></div>
-            <div className="dash-calendar"><Calendar /></div>
+            <div className="dash-calendar"><Calendar userId={this.props.userId}/></div>
           </div>
   }
 }

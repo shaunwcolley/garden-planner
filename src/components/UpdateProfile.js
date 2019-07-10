@@ -18,7 +18,6 @@ class UpdateProfile extends Component {
     axios.post(`http://localhost:8080/api/profile/update/${this.props.user.id}`, this.state)
     .then(response => {
       if (response.data.success) {
-        console.log(response.data);
         alert('User info was updated');
         this.props.changeDisplay();
         this.props.userFetch();
