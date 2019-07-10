@@ -107,6 +107,7 @@ class Planner extends Component {
       let url = 'http://localhost:8080/api' + this.props.match.url
       axios.get(url)
       .then(response => {
+        console.log(response.data)
         this.props.onPlanFetch(response.data)
       }).then(() => {
         if(this.props.plan !== null) {
@@ -115,7 +116,6 @@ class Planner extends Component {
             let cellId = planCells[i].id
             let num = planCells[i].cellNum
             let plantInfo = planCells[i].plant
-            //console.log(planCells[i])
             let nullPlant = ''
             let plantStore = ''
             if(plantInfo){
