@@ -3,16 +3,44 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Calendar extends Component {
+  constructor() {
+    super()
+    this.state = {
+      plans: null,
+      message: null
+    }
+  }
 
   componentDidMount() {
     const url = 'http://localhost:8080/api/calendar/' + this.props.userId;
     axios.get(url)
-    .then(response => console.log(response.data))
+    .then(response => {
+      if(response.data.success){
+        this.setState({
+          plans: response.data.plans
+        })
+      }
+      else {
+        this.setState({
+          message: response.data.error
+        })
+      }
+    })
   };
 
   render() {
+    let display = []
+    const { plans } = this.state
+    if(plans) {
+      plans[0].cells.forEach(cell => {
+        const {plant: { name }, updatedAt} = cell
+        console.log(cell)
+        display.push(name)
+      })
+    }
     return <div>
             Calendar
+            {display}
             <table>
               <tbody>
                 <tr>
