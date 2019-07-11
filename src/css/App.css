@@ -29,6 +29,7 @@
   display: grid;
   grid-template-columns: 33% auto;
   grid-template-rows: 25rem 25rem;
+  align-items: center;
 }
 
 .dash-plans {

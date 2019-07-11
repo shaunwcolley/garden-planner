@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 
 import axios from 'axios';
 
@@ -29,18 +30,34 @@ class Calendar extends Component {
   };
 
   render() {
+    function addDays(date, days) {
+      let result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
     let display = []
-    const { plans } = this.state
+    const { plans } = this.state;
     if(plans) {
-      plans[0].cells.forEach(cell => {
-        const {plant: { name }, updatedAt} = cell
-        console.log(cell)
-        display.push(name)
+      plans.forEach(plan => {
+        plan.cells.forEach(cell => {
+          const {id, plant: { name, firstHarvestDate }, updatedAt} = cell
+          let plantedDate = new Date(updatedAt);
+          const harvestDate = addDays(plantedDate,parseInt(firstHarvestDate));
+          const row = (
+                      <tr key={id}>
+                        <td>{plan.name}</td>
+                        <td>{name}</td>
+                        <td><Moment format="MMMM DD YYYY">{plantedDate}</Moment></td>
+                        <td><Moment format="MMMM DD YYYY">{harvestDate}</Moment></td>
+                      </tr>
+                    );
+          display.push(row);
+        })
       })
     }
+
     return <div>
             Calendar
-            {display}
             <table>
               <tbody>
                 <tr>
@@ -51,18 +68,13 @@ class Calendar extends Component {
                     Plant
                   </th>
                   <th>
-                    Harvest Soon
+                    Planted
                   </th>
                   <th>
-                    Plant Soon
+                    Earliest Expected Harvest
                   </th>
                 </tr>
-                <tr>
-                  <td>K's Garden</td>
-                  <td>Onion</td>
-                  <td>July 8th</td>
-                  <td></td>
-                </tr>
+                {display}
               </tbody>
             </table>
            </div>
