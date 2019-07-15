@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import '../css/Calendar.css';
 
 import axios from 'axios';
 
@@ -57,8 +58,10 @@ class Calendar extends Component {
     }
 
     return <div>
-            Calendar
-            <table>
+            <h3 className="calendar-heading">
+              Calendar
+            </h3>
+            <table className="calendar">
               <tbody>
                 <tr>
                   <th>

@@ -1,0 +1,12 @@
+.calendar-heading {
+  color: #307820;
+  text-align: center;
+}
+
+.calendar tbody tr td{
+  padding: .5rem;
+}
+
+.calendar th {
+  padding: 1rem;
+}
