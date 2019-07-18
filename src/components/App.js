@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Calendar from './Calendar';
 import MakePlan from './MakePlan';
-import Popup from './Popup'
+import Popup from './Popup';
+import About from './About';
 import '../css/App.css';
 
 class App extends Component {
@@ -11,11 +12,11 @@ class App extends Component {
     const profileLink = "/profile/" + this.props.userId;
     if(!this.props.isAuth) {
       return (
-        <div className="home-body">
-          <h4>Howdy, this is a garden planner app. Click on <u>Make Plan</u> above to make new plan or view and update existing plans.</h4>
+        <Fragment>
+          <About />
         {this.props.login ? <Popup login={this.props.login} /> : null}
         {this.props.register ? <Popup register={this.props.register} history={this.props.history} /> : null}
-        </div>
+        </Fragment>
       )
     }
     return <div className="dash-container">

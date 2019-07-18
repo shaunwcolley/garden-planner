@@ -51,12 +51,16 @@ class Login extends Component {
     return(
       <div className="login-body">
         <form className="login-form">
-        <input autoComplete="username" type='text' onChange={this.handleTextBoxChange} placeholder="email" name="email"/>
-        <input autoComplete="current-password" type='password' onChange={this.handleTextBoxChange} placeholder="password" name="pass"/>
+        <label>Email</label>
+        <input autoComplete="username" type='text' onChange={this.handleTextBoxChange} placeholder="abc123@email.com" name="email"/>
+        <label>Password</label>
+        <input autoComplete="current-password" type='password' onChange={this.handleTextBoxChange} name="pass"/>
         <button className="login-btn" onClick={(e) => this.handleLoginClick(e)}>Login</button>
         </form>
         <h4>{this.state.message}</h4>
-        <NavLink to='/register'>Not a member? Register now to save your garden plans.</NavLink>
+        <div className="registration-link" onClick={() => (this.props.onLoginPop(), this.props.onRegisterPop())}>
+          <u>Not a member? Register now to save your garden plans.</u>
+        </div>
       </div>
     )
   }
@@ -64,8 +68,9 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSignIn: (token, userId) => dispatch({ type: actionTypes.SIGN_IN, token, userId}),
-    onLoginPop: () => dispatch({ type: actionTypes.LOGIN_POPUP})
+    onSignIn: (token, userId) => dispatch({ type: actionTypes.SIGN_IN, token, userId }),
+    onLoginPop: () => dispatch({ type: actionTypes.LOGIN_POPUP }),
+    onRegisterPop: () => dispatch({ type: actionTypes.REGISTER_POPUP }),
   };
 };
 
