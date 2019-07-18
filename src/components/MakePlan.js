@@ -25,10 +25,9 @@ class MakePlan extends Component {
 
     return(
       <div className="make-plan-body">
-        <h4>Make a Plan:</h4>
-        <p><button className="new-btn" onClick={this.handleNewPlanClick}>Make New Plan</button></p>
-        <h4>Use Existing Plan:</h4>
+        <h3 className="plans-heading">Plans:</h3>
         <table className="make-plan-table"><tbody>{plans}</tbody></table>
+        <button className="new-btn" onClick={this.handleNewPlanClick}><h3>Make A New Plan</h3></button>
       </div>
     )
   }

@@ -2,15 +2,12 @@
   color: #307820;
   text-align: center;
   position: sticky;
+  z-index: -1;
 }
 
 .calendar tbody tr td{
   padding: .5rem;
 }
-
-/* .calendar th {
-  padding: 1rem;
-} */
 
 .calendar {
   overflow: auto;
@@ -20,7 +17,7 @@
 th.sticky-header {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: -1;
   background-color: white;
   padding-bottom: 0;
   border-bottom: solid;

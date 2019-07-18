@@ -2,7 +2,6 @@
 display: flex;
 flex-direction: column;
 align-items: center;
-height: 50rem;
 }
 .make-plan-table {
   border-collapse: collapse;
@@ -14,30 +13,38 @@ height: 50rem;
 }
 .make-plan-table tr:last-child td {
   border: none;
-  padding-bottom: 7rem;
+  padding-bottom: 1rem;
 }
 .view-btn {
   font-size: 1rem;
   background-color: white;
   border: none;
-  color: navy;
+  color: #6A8EAE;
   font-weight: bold;
 }
 .view-btn:hover {
   font-size: 1rem;
-  color: skyblue;
+  color: #A4D5E7;
   border-color: white;
 }
 
 .new-btn {
   font-size: 1rem;
   background-color: white;
-  border-color: navy;
-  color: navy;
+  border: none;
+  color: #6A8EAE;
   font-weight: bold;
 }
 .new-btn:hover {
   font-size: 1rem;
-  color: skyblue;
+  color: #A4D5E7;
   border-color: white;
+}
+
+.plans-heading {
+  text-align: center;
+  width: 80%;
+  padding-bottom: 1rem;
+  border-bottom: solid;
+  border-color: #6A8EAE;
 }

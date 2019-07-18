@@ -61,7 +61,7 @@ class Calendar extends Component {
 
     return <div className="calendar-container">
             <h2 className="calendar-heading">
-              Calendar
+              Garden Calendar
             </h2>
             <div className="calendar">
               <table>

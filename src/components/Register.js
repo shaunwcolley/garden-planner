@@ -38,7 +38,7 @@ class Register extends Component {
   render() {
     return(
       <div className="register-body">
-        <h4>Register:</h4>
+        <h4>Registration</h4>
         <input onChange={this.handleTextBoxChange} type='text' placeholder="first name" name="firstName"/>
         <input onChange={this.handleTextBoxChange} type='text' placeholder="last name" name="lastName"/>
         <input onChange={this.handleTextBoxChange} type='number' placeholder="zipcode" name="zipcode"/>

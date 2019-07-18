@@ -14,7 +14,7 @@ ul {
   display: flex;
   position: sticky;
   top: 0;
-  background-color: blue;
+  background-color: #6A8EAE;
   color: white;
   margin-bottom: .5rem;
   padding-bottom: 0;
@@ -33,7 +33,7 @@ ul {
 .footer {
   position: relative;
   bottom: 0;
-  background-color: green;
+  background-color: #307820;;
   color: white;
   width:100%;
   text-align: center;
@@ -60,13 +60,13 @@ ul {
 }
 
 .navLinkButton {
-  background-color: blue;
+  background-color: #6A8EAE;
   color: white;
   border: none;
   font-size: 1rem;
 }
 
-div .makeGardenLink {
+div .register-link, div .profile-link {
   display: flex;
   margin-left: auto;
 }
@@ -96,7 +96,7 @@ div .makeGardenLink {
 
 .task-header {
   display: inline-block;
-  background-color: skyblue;
+  background-color: #A4D5E7;
   width: 100%;
 }
 
