@@ -8,7 +8,7 @@ export class Header extends Component {
   handleSignOutClick = () => {
     localStorage.removeItem('jsonwebtoken');
     this.props.onSignOut()
-    this.props.history.push('/login')
+    this.props.history.push('/')
   }
   handleLoginPopupClick = () => {
     this.props.onLoginPop()

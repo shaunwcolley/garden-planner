@@ -3,8 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 10rem;
-  height: 10rem;
+  padding-top: 5rem;
 }
 
 .login-body input {
@@ -24,4 +23,20 @@
   color: #A4D5E7;
   border-color: white;
   margin: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration-link {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+  color: #57A773;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
 }

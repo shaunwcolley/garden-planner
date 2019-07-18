@@ -64,6 +64,7 @@ ul {
   color: white;
   border: none;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 div .login-link, div .profile-link {
