@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import '../css/Login.css';
 import { setAuthHeader } from '../utils/authenticate.js';
+import * as actionTypes from '../store/actions/actionTypes';
 
 class Login extends Component {
   constructor(){
@@ -21,7 +22,12 @@ class Login extends Component {
     })
   }
 
-  handleLoginClick = () => {
+  handleLoginClick = (e) => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      message: "..."
+    })
     axios.post('http://localhost:8080/login', this.state)
     .then(response => {
       if (response.data.success){
@@ -30,28 +36,25 @@ class Login extends Component {
         localStorage.setItem('jsonwebtoken', token);
         this.props.onSignIn(token, userId);
         setAuthHeader(token);
-        this.props.history.push('/');
         return
-      }
-      if(!response.data.success) {
+      } else if(!response.data.success) {
         this.setState({
           ...this.state,
           message: response.data.message,
         });
+      return
       };
-    }).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }));
-    this.setState({
-      ...this.state,
-      message: "..."
-    })
+    }).then(() => this.props.onLoginPop()).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }));
   }
 
   render() {
     return(
       <div className="login-body">
-        <input type='text' onChange={this.handleTextBoxChange} placeholder="email" name="email"/>
-        <input type='password' onChange={this.handleTextBoxChange} placeholder="password" name="pass"/>
-        <button className="login-btn" onClick={this.handleLoginClick}>Login</button>
+        <form className="login-form">
+        <input autoComplete="username" type='text' onChange={this.handleTextBoxChange} placeholder="email" name="email"/>
+        <input autoComplete="current-password" type='password' onChange={this.handleTextBoxChange} placeholder="password" name="pass"/>
+        <button className="login-btn" onClick={(e) => this.handleLoginClick(e)}>Login</button>
+        </form>
         <h4>{this.state.message}</h4>
         <NavLink to='/register'>Not a member? Register now to save your garden plans.</NavLink>
       </div>
@@ -61,7 +64,8 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSignIn: (token, userId) => dispatch({ type: 'SIGN_IN', token, userId}),
+    onSignIn: (token, userId) => dispatch({ type: actionTypes.SIGN_IN, token, userId}),
+    onLoginPop: () => dispatch({ type: actionTypes.LOGIN_POPUP})
   };
 };
 

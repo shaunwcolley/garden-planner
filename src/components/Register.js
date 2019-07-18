@@ -43,13 +43,15 @@ class Register extends Component {
     return(
       <div className="register-body">
         <h4>Registration</h4>
-        <input onChange={this.handleTextBoxChange} type='text' placeholder="first name" name="firstName"/>
-        <input onChange={this.handleTextBoxChange} type='text' placeholder="last name" name="lastName"/>
-        <input onChange={this.handleTextBoxChange} type='number' placeholder="zipcode" name="zipcode"/>
-        <input onChange={this.handleTextBoxChange} type='text' placeholder="email" name="email"/>
-        <input onChange={this.handleTextBoxChange} type='text' placeholder="Favorite Vegetable" name="favVeg"/>
-        <input onChange={this.handleTextBoxChange} type='password' placeholder="password" name="pass"/>
-        <button className="register-btn" onClick={() => this.handleRegisterClick()}>Register</button>
+        <form>
+          <input onChange={this.handleTextBoxChange} type='text' placeholder="first name" name="firstName"/>
+          <input onChange={this.handleTextBoxChange} type='text' placeholder="last name" name="lastName"/>
+          <input onChange={this.handleTextBoxChange} type='number' placeholder="zipcode" name="zipcode"/>
+          <input onChange={this.handleTextBoxChange} type='text' placeholder="Favorite Vegetable" name="favVeg"/>
+          <input autoComplete="username" onChange={this.handleTextBoxChange} type='text' placeholder="email" name="email"/>
+          <input autoComplete="new-password" onChange={this.handleTextBoxChange} type='password' placeholder="password" name="pass"/>
+          <button className="register-btn" onClick={() => this.handleRegisterClick()}>Register</button>
+        </form>
         <h4>{this.state.message}</h4>
       </div>
     )

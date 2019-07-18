@@ -7,13 +7,6 @@ import Popup from './Popup'
 import '../css/App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      login: this.props.login,
-      register: this.props.register,
-    }
-  }
   render() {
     const profileLink = "/profile/" + this.props.userId;
     if(!this.props.isAuth) {
