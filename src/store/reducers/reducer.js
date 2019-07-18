@@ -9,7 +9,9 @@ const initialState = {
   isAuth: false,
   userId: null,
   plan: null,
-  planName: ''
+  planName: '',
+  login: false,
+  register: false,
 }
 const cellCalc = (width,height) => {
   const cells = height * width
@@ -66,6 +68,16 @@ const reducer = (state = initialState, action) => {
       ...state,
       isAuth: false,
       userId: null,
+    }
+    case actionTypes.LOGIN_POPUP :
+    return {
+      ...state,
+      login: state.login === true ? false : true
+    }
+    case actionTypes.REGISTER_POPUP :
+    return {
+      ...state,
+      register: state.register === true ? false : true
     }
     default:
     return state
