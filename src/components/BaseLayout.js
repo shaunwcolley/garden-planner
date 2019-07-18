@@ -10,13 +10,22 @@ export class Header extends Component {
     this.props.onSignOut()
     this.props.history.push('/login')
   }
+  handleLoginPopupClick = () => {
+    this.props.onLoginPop()
+    this.props.history.push('/')
+  }
+
+  handleRegisterPopupClick = () => {
+    this.props.onRegisterPop()
+    this.props.history.push('/')
+  }
   render() {
     const profileLink = "/profile/" + this.props.userId
     return (
       <div className="header">
         <div><NavLink to='/' className="navLink">Home</NavLink></div>
-        {!this.props.isAuthenticated ? <div className="register-link"><NavLink to="/register" className="navLink">Register</NavLink></div> : null}
-        {!this.props.isAuthenticated ? <div><NavLink to="/login" className="navLink">Login</NavLink></div> : null}
+        {!this.props.isAuthenticated ? <button className="navLinkButton login-link" onClick={() => this.handleLoginPopupClick()}>Login</button> : null}
+        {!this.props.isAuthenticated ? <button className="navLinkButton" onClick={() => this.handleRegisterPopupClick()}>Register</button> : null}
         {this.props.isAuthenticated ? <div className="profile-link"> <NavLink to={profileLink} className="navLink"> Profile </NavLink></div> : null }
         {this.props.isAuthenticated ? <button className="navLinkButton" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
       </div>
@@ -39,7 +48,7 @@ class BaseLayout extends Component {
   render(){
     return (
       <div className="body">
-        <Header isAuthenticated={this.props.isAuth} onSignOut={() => this.props.onSignOut()} history={this.props.history} userId={this.props.userId}/>
+        <Header isAuthenticated={this.props.isAuth} onSignOut={() => this.props.onSignOut()} onLoginPop={() => this.props.onLoginPop()} onRegisterPop={() => this.props.onRegisterPop()} history={this.props.history} userId={this.props.userId}/>
           {this.props.children}
         <Footer />
       </div>
@@ -56,7 +65,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSignOut: () => dispatch({type: actionTypes.SIGN_OUT})
+    onSignOut: () => dispatch({ type: actionTypes.SIGN_OUT }),
+    onLoginPop: () => dispatch({ type: actionTypes.LOGIN_POPUP }),
+    onRegisterPop: () => dispatch({ type: actionTypes.REGISTER_POPUP }),
   }
 }
 

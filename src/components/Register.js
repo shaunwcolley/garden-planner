@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Register.css'
+import { connect } from 'react-redux';
+import * as actionTypes from '../store/actions/actionTypes';
 import axios from 'axios';
 
 class Register extends Component {
@@ -23,10 +25,12 @@ class Register extends Component {
 
   handleRegisterClick = () => {
     const creds = this.state;
+    console.log('register')
     axios.post('http://localhost:8080/register', creds)
     .then(response => {
       if (response.data.success) {
-        this.props.history.push('/login')
+        this.props.onRegisterPop();
+        this.props.history.push('/');
         return
       }
       this.setState({
@@ -45,11 +49,17 @@ class Register extends Component {
         <input onChange={this.handleTextBoxChange} type='text' placeholder="email" name="email"/>
         <input onChange={this.handleTextBoxChange} type='text' placeholder="Favorite Vegetable" name="favVeg"/>
         <input onChange={this.handleTextBoxChange} type='password' placeholder="password" name="pass"/>
-        <button className="register-btn" onClick={this.handleRegisterClick}>Register</button>
+        <button className="register-btn" onClick={() => this.handleRegisterClick()}>Register</button>
         <h4>{this.state.message}</h4>
       </div>
     )
   }
 }
 
-export default Register
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onRegisterPop: () => dispatch({ type: actionTypes.REGISTER_POPUP })
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Register);
