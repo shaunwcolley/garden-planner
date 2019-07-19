@@ -12,6 +12,7 @@ const initialState = {
   planName: '',
   login: false,
   register: false,
+  makePlan: false,
 }
 const cellCalc = (width,height) => {
   const cells = height * width
@@ -72,14 +73,19 @@ const reducer = (state = initialState, action) => {
     case actionTypes.LOGIN_POPUP :
     return {
       ...state,
-      login: state.login === true ? false : true
+      login: state.login === true ? false : true,
     }
     case actionTypes.REGISTER_POPUP :
     return {
       ...state,
-      register: state.register === true ? false : true
+      register: state.register === true ? false : true,
     }
-    default:
+    case actionTypes.PLAN_POPUP :
+    return {
+      ...state,
+      makePlan: state.makePlan ? false : true,
+    }
+    default :
     return state
   }
 }

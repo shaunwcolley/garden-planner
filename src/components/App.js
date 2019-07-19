@@ -14,8 +14,8 @@ class App extends Component {
       return (
         <Fragment>
           <About />
-        {this.props.login ? <Popup login={this.props.login} /> : null}
-        {this.props.register ? <Popup register={this.props.register} history={this.props.history} /> : null}
+        {this.props.login ? <Popup /> : null}
+        {this.props.register ? <Popup history={this.props.history} /> : null}
         </Fragment>
       )
     }
@@ -23,6 +23,7 @@ class App extends Component {
             <div className="dash-plans"><MakePlan history={this.props.history} /></div>
             <div className="dash-profile"><NavLink to={profileLink}>Profile</NavLink></div>
             <div className="dash-calendar"><Calendar userId={this.props.userId}/></div>
+            {this.props.makePlan ? <Popup history={this.props.history} /> : null}
           </div>
   }
 }
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => {
     userId: state.userId,
     login: state.login,
     register: state.register,
+    makePlan: state.makePlan,
   }
 }
 

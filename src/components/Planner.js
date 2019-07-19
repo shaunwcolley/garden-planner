@@ -53,8 +53,10 @@ class Planner extends Component {
     let plant = {}
     let cells = cellNumbers.map(num => {
       plant = this.state.plantsInPlan[num]
+      console.log(num)
       try{
-        let cellId = plant.cellId
+        let cellId = plant.cellId ? plant.cellId : num;
+        console.log(plant)
         return <div key={cellId} className="droppable"
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e, num, cellId)}>
@@ -143,7 +145,7 @@ class Planner extends Component {
         }
       })
     } else if (this.props.height === 0 || this.props.width === 0) {
-      this.props.history.push('/make-garden')
+      this.props.history.push('/')
     }
     this.props.onPlantsFetched()
     this.tableGenerate()
@@ -159,11 +161,10 @@ class Planner extends Component {
     })
     .then(response => {
       if(response.data.success){
-        console.log(response.data.message)
-        this.props.history.push('/make-garden')
+        this.props.history.push('/')
       } else {
         console.log(response.data.message)
-        this.props.history.push('/make-garden')
+        this.props.history.push('/')
       }
     })
   }
@@ -172,8 +173,7 @@ class Planner extends Component {
     axios.post("http://localhost:8080/api/update-plan", {
       plantsInPlan: this.state.plantsInPlan
     }).then(response => {
-      console.log(response.data.message)
-      this.props.history.push('/make-garden')
+      this.props.history.push('/')
     })
   }
 
@@ -202,7 +202,7 @@ class Planner extends Component {
     let displayPlants = []
     plantedPlants.forEach((plant,index) => {
       if(Array.isArray(plant) || plant === undefined){
-        console.log('nothing planted')
+        return
       } else {
         if(plant.name) {
           let display = (<tr key={index+1}>
