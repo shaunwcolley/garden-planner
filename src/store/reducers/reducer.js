@@ -13,6 +13,7 @@ const initialState = {
   login: false,
   register: false,
   makePlan: false,
+  profilePop: false,
 }
 const cellCalc = (width,height) => {
   const cells = height * width
@@ -84,6 +85,11 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       makePlan: state.makePlan ? false : true,
+    }
+    case actionTypes.PROFILE_POPUP :
+    return {
+      ...state,
+      profilePop: state.profilePop ? false : true,
     }
     default :
     return state
