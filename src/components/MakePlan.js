@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import * as actionCreators from '../store/actions/actionCreators'
-import "../css/MakePlan.css"
+import { connect } from 'react-redux';
+import * as actionCreators from '../store/actions/actionCreators';
+import * as actionTypes from '../store/actions/actionTypes';
+import "../css/MakePlan.css";
 
 class MakePlan extends Component {
 
@@ -10,8 +11,8 @@ class MakePlan extends Component {
   }
 
   handleNewPlanClick = () => {
-    this.props.history.push('/plan-size')
-    this.props.onNewPlan()
+    this.props.onPlanPop();
+    this.props.onNewPlan();
   }
   handleUseOldClick = (planId) => {
     let url = '/plan/' + planId
@@ -43,7 +44,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onPlansFetched: (userId) => dispatch(actionCreators.allPlansFetched(userId)),
-    onNewPlan: () => dispatch(actionCreators.newPlan())
+    onNewPlan: () => dispatch(actionCreators.newPlan()),
+    onPlanPop: () => dispatch({ type: actionTypes.PLAN_POPUP }),
   }
 }
 

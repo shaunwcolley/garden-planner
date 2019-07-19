@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../css/Login.css';
@@ -47,6 +46,11 @@ class Login extends Component {
     }).then(() => this.props.onLoginPop()).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }));
   }
 
+  handleRegistrationLinkClick = () => {
+    this.props.onLoginPop();
+    this.props.onRegisterPop();
+  }
+
   render() {
     return(
       <div className="login-body">
@@ -58,7 +62,7 @@ class Login extends Component {
         <button className="login-btn" onClick={(e) => this.handleLoginClick(e)}>Login</button>
         </form>
         <h4>{this.state.message}</h4>
-        <div className="registration-link" onClick={() => (this.props.onLoginPop(), this.props.onRegisterPop())}>
+        <div className="registration-link" onClick={() => this.handleRegistrationLinkClick()}>
           <u>Not a member? Register now to save your garden plans.</u>
         </div>
       </div>
