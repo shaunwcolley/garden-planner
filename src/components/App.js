@@ -1,15 +1,16 @@
 import React, { Component, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Calendar from './Calendar';
 import MakePlan from './MakePlan';
 import Popup from './Popup';
 import About from './About';
+import Profile from './Profile';
+import * as actionTypes from '../store/actions/actionTypes';
 import '../css/App.css';
 
 class App extends Component {
+
   render() {
-    const profileLink = "/profile/" + this.props.userId;
     if(!this.props.isAuth) {
       return (
         <Fragment>
@@ -20,9 +21,15 @@ class App extends Component {
       )
     }
     return <div className="dash-container">
-            <div className="dash-plans"><MakePlan history={this.props.history} /></div>
-            <div className="dash-profile"><NavLink to={profileLink}>Profile</NavLink></div>
-            <div className="dash-calendar"><Calendar userId={this.props.userId}/></div>
+            <div className="dash-plans">
+              <MakePlan history={this.props.history} />
+            </div>
+            <div className="dash-profile">
+              <Profile userId={this.props.userId} profilePop={this.props.profilePop} onProfilePop={this.props.onProfilePop} />
+            </div>
+            <div className="dash-calendar">
+              <Calendar userId={this.props.userId}/>
+            </div>
             {this.props.makePlan ? <Popup history={this.props.history} /> : null}
           </div>
   }
@@ -35,7 +42,14 @@ const mapStateToProps = (state) => {
     login: state.login,
     register: state.register,
     makePlan: state.makePlan,
+    profilePop: state.profilePop,
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onProfilePop: () => dispatch({ type: actionTypes.PROFILE_POPUP})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

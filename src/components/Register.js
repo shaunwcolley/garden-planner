@@ -50,8 +50,16 @@ class Register extends Component {
           <input onChange={this.handleTextBoxChange} type='text' name="lastName"/>
           <label>Zip Code</label>
           <input onChange={this.handleTextBoxChange} type='number' placeholder="12345" name="zipcode"/>
-          <label>Favorite Vegetable</label>
-          <input onChange={this.handleTextBoxChange} type='text' placeholder="Carrots" name="favVeg"/>
+          <label>Veggie Avatar:</label>
+          <select onChange={this.handleTextBoxChange} name="favVeg">
+            <option value="Onions">Onions</option>
+            <option value="Tomatoes">Tomatoes</option>
+            <option value="Potatoes">Potatoes</option>
+            <option value="GreenBeans">Green Beans</option>
+            <option value="Broccoli">Broccoli</option>
+            <option value="Lavendar">Lavendar</option>
+            <option value="Thyme">Thyme</option>
+          </select>
           <label>Email</label>
           <input autoComplete="username" onChange={this.handleTextBoxChange} type='text' placeholder="abc123@email.com" name="email"/>
           <label>Password</label>
