@@ -25,8 +25,9 @@ class PlanSize extends Component {
 
   handleSaveSizeClick = () => {
     let dimensions = this.state
-    this.props.onSizeSave(dimensions, this.state.planName)
-    this.props.history.push('/plan/new')
+    this.props.onSizeSave(dimensions, this.state.planName);
+    this.props.onPlanPop();
+    this.props.history.push('/plan/new');
   }
   render() {
     return(
@@ -47,7 +48,8 @@ class PlanSize extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSizeSave: (dimensions, planName) => dispatch(actionCreators.sizeSave(dimensions, planName))
+    onSizeSave: (dimensions, planName) => dispatch(actionCreators.sizeSave(dimensions, planName)),
+    onPlanPop: () => dispatch(actionCreators.planPopup())
   }
 }
 

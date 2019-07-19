@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../store/actions/actionCreators';
-import * as actionTypes from '../store/actions/actionTypes';
 import "../css/MakePlan.css";
 
 class MakePlan extends Component {
@@ -45,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onPlansFetched: (userId) => dispatch(actionCreators.allPlansFetched(userId)),
     onNewPlan: () => dispatch(actionCreators.newPlan()),
-    onPlanPop: () => dispatch({ type: actionTypes.PLAN_POPUP }),
+    onPlanPop: () => dispatch(actionCreators.planPopup()),
   }
 }
 

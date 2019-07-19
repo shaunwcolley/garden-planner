@@ -34,5 +34,9 @@ export const onePlanFetched = (plan) => {
 
 export const newPlan = () => {
   return dispatch =>
-  dispatch({type: actionTypes.NEW_PLAN})
+  dispatch({ type: actionTypes.NEW_PLAN })
+}
+
+export const planPopup = () => {
+  return dispatch => dispatch({ type: actionTypes.PLAN_POPUP })
 }
