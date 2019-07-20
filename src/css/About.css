@@ -1,0 +1,84 @@
+.about-container {
+  display: flex;
+  justify-content: center;
+}
+
+.about-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 960px;
+  /* background-image: url("https://cdn.pixabay.com/photo/2017/02/01/11/25/background-2029771_960_720.png"); */
+  /* background-image: url("http://res.publicdomainfiles.com/pdf_view/68/13925543416229.png"); */
+  /* background-image: url("https://www.goodfreephotos.com/albums/vector-images/red-radish-vector-clipart.png"); */
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.about-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: solid;
+  color: white;
+}
+
+.about-circle:hover {
+  background-color: white;
+  color: #6A8EAE;
+  cursor: pointer;
+}
+
+.top-circle {
+  margin-right: 200px;
+  width: 275px;
+  height: 275px;
+  border-color: #D1FAFF;
+  background-color: #D1FAFF;
+  color: #307820;
+}
+
+.middle-circle {
+  align-self: flex-start;
+  margin-left: 260px;
+  margin-top: 25px;
+  width: 150px;
+  height: 150px;
+  border-color: #6A8EAE;
+  background-color: #6A8EAE;
+}
+
+.bottom-circle {
+  margin-right: 125px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  width: 200px;
+  height: 200px;
+  border-color: #57A773;
+  background-color: #57A773;
+}
+
+.about-footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.flower {
+  height: 160px;
+  margin-bottom: 3.2rem;
+}
+.flower-left {
+  width: 87px;
+  margin-right: 15rem;
+}
+
+.flower-right {
+  width: 104px;
+  margin-left: 15rem;
+}

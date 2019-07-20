@@ -37,7 +37,7 @@ export class Footer extends Component {
   render() {
     return (
       <div className="footer">
-        Copyright 2019  -  Shaun Colley
+          Copyright 2019  -  Shaun Colley
       </div>
     )
   }
@@ -49,7 +49,9 @@ class BaseLayout extends Component {
     return (
       <div className="body">
         <Header isAuthenticated={this.props.isAuth} onSignOut={() => this.props.onSignOut()} onLoginPop={() => this.props.onLoginPop()} onRegisterPop={() => this.props.onRegisterPop()} history={this.props.history} userId={this.props.userId}/>
+          <div className="content-wrap">
           {this.props.children}
+          </div>
         <Footer />
       </div>
     )
