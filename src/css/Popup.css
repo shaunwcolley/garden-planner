@@ -20,12 +20,8 @@
 
 .close-popup {
   font-size: 1.17em;
-  border: solid;
-  border-color: #A4D5E7;
+  border: none;
   color: navy;
-  border-radius: 50%;
-  border-radius: 50%;
-  border-width: thin;
   margin: .5rem;
 }
 .close-popup:hover {
