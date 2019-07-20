@@ -31,15 +31,19 @@ ul {
 }
 
 .footer {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
   bottom: 0;
   background-color: #307820;;
   color: white;
   width:100%;
-  text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  height: 3.5rem;
+}
 
+.content-wrap {
+  padding-bottom: 3.5rem;
 }
 
 .home {
@@ -51,7 +55,9 @@ ul {
 
 .body {
   display: flex;
+  position: relative;
   flex-direction: column;
+  min-height: 100vh
 }
 .navLink {
   color: white;
