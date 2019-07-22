@@ -17,6 +17,7 @@
 
 .about-circle {
   display: flex;
+  position: absolute;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -31,7 +32,7 @@
 }
 
 .top-circle {
-  margin-right: 200px;
+  right: 345px;
   width: 275px;
   height: 275px;
   border-color: #D1FAFF;
@@ -47,6 +48,8 @@
   height: 150px;
   border-color: #6A8EAE;
   background-color: #6A8EAE;
+  margin-left: 255px;
+  top: 390px;
 }
 
 .bottom-circle {
@@ -57,6 +60,8 @@
   height: 200px;
   border-color: #57A773;
   background-color: #57A773;
+  bottom: 100px;
+  right: 150px;
 }
 
 .about-footer {
@@ -81,4 +86,9 @@
 .flower-right {
   width: 104px;
   margin-left: 15rem;
+}
+
+.open {
+  background-color: pink;
+  z-index: 2;
 }

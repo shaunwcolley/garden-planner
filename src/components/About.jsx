@@ -5,44 +5,79 @@ class About extends Component {
   constructor() {
     super()
     this.state = {
-      topCircle: false,
-      middleCircle: false,
-      bottomCircle: false
+      topOpen: false,
+      midOpen: false,
+      botOpen: false,
+      topDia: 275,
+      midDia: 150,
+      botDia: 200,
     }
   }
 
+  handleToggleReset = () => {
+    const {topDia, midDia, botDia } = this.state
+    const circles = document.querySelectorAll('.about-circle')
+    circles.forEach(circle => {
+      if(circle.classList.contains('top-circle')) {
+        console.log('click')
+        circle.style.height = topDia + 'px';
+        circle.style.width = topDia + 'px';
+      }
+      if(circle.classList.contains('middle-circle')) {
+        circle.style.height = midDia + 'px';
+        circle.style.width = midDia + 'px';
+      }
+      if(circle.classList.contains('bottom-circle')) {
+        circle.style.height = botDia + 'px';
+        circle.style.width = botDia + 'px';
+      }
+      circle.classList.remove('open')
+    })
+  }
+
   handleCircleClick = (e) => {
+    this.handleToggleReset();
+    function toggleSize(state, prevDia) {
+      if (state) {
+        e.target.style.height = prevDia + 'px';
+        e.target.style.width = prevDia + 'px';
+      } else {
+        e.target.style.height = (prevDia * 2) + 'px'
+        e.target.style.width = (prevDia * 2) + 'px'
+      }
+    }
     if(e.target.classList.contains('top-circle')) {
+      e.target.classList.toggle('open')
       this.setState({
-        topCircle: this.state.topCircle ? false : true,
-        middleCircle: false,
-        bottomCircle: false,
+        topOpen: this.state.topOpen ? false : true,
+        midOpen: false,
+        botOpen: false,
       })
+      toggleSize(this.state.topOpen, this.state.topDia)
     }
     if(e.target.classList.contains('middle-circle')) {
+      e.target.classList.toggle('open')
       this.setState({
-        topCircle: false,
-        middleCircle: this.state.middleCircle ? false : true,
-        bottomCircle: false,
+        topOpen: false,
+        midOpen: this.state.midOpen ? false : true,
+        botOpen: false,
       })
+      toggleSize(this.state.midOpen, this.state.midDia)
     }
     if(e.target.classList.contains('bottom-circle')) {
+      e.target.classList.toggle('open')
       this.setState({
-        topCircle: false,
-        middleCircle: false,
-        bottomCircle: this.state.bottomCircle ? false : true,
+        topOpen: false,
+        midOpen: false,
+        botOpen: this.state.botOpen ? false : true,
       })
+      toggleSize(this.state.botOpen, this.state.midDia)
     }
-    console.log(this.state)
   }
 
   handleEscClick = (e) => {
     if(e.keyCode === 27) {
-      this.setState({
-        topCircle: false,
-        middleCircle: false,
-        bottomCircle: false
-      })
+      this.handleToggleReset();
     }
   }
 
@@ -54,43 +89,19 @@ class About extends Component {
     document.removeEventListener('keydown', this.handleEscClick)
   }
 
-  render(){
-    let topCircle = <div></div>
-    let middleCircle = <div></div>
-    let bottomCircle = <div></div>
-    if (this.state.topCircle) {
-        topCircle = (<div>a</div>)
-    } else {
-      topCircle = (
-        <div className="about-circle top-circle" onClick={(e) => this.handleCircleClick(e)}>
-          <span>Gardening</span>
-        </div>
-      )
-    }
-    if (this.state.middleCircle) {
-      middleCircle = <div>b</div>
-    } else {
-      middleCircle = (
-        <div className="about-circle middle-circle" onClick={(e) => this.handleCircleClick(e)}>
-          <span>is</span>
-        </div>
-      )
-    }
-    if (this.state.bottomCircle) {
-      bottomCircle = <div>c</div>
-    } else {
-      bottomCircle = (
-        <div className="about-circle bottom-circle" onClick={(e) => this.handleCircleClick(e)}>
-          <span>fun!</span>
-        </div>
-      )
-    }
+  render() {
     return (
       <div className="about-container">
         <div className="about-body">
-          {topCircle}
-          {middleCircle}
-          {bottomCircle}
+          <div className="about-circle top-circle" onClick={(e) => this.handleCircleClick(e)}>
+            <span>Gardening</span>
+          </div>
+          <div className="about-circle middle-circle" onClick={(e) => this.handleCircleClick(e)}>
+            <span>is</span>
+          </div>
+          <div className="about-circle bottom-circle" onClick={(e) => this.handleCircleClick(e)}>
+            <span>fun!</span>
+          </div>
         </div>
         <div className="about-footer">
           <img className="flower-left flower" alt="carnation" src="https://cdn.pixabay.com/photo/2012/04/18/21/01/carnation-37872_960_720.png"/>
