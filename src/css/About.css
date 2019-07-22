@@ -36,6 +36,7 @@
 
 .about-circle .hidden-text {
   position: absolute;
+  display: none;
 }
 
 .about-circle:hover {
@@ -122,9 +123,13 @@
   z-index: 2;
 }
 
-.about-circle.open > *:last-child{
+.about-circle.open > *:last-child {
   transform: translateY(80%) translateX(7%);
 }
-.about-circle.open > *:first-child{
+.about-circle.open > *:first-child {
   transform: translateY(-130%);
+}
+
+.about-circle.open > * {
+  display: flex;
 }
