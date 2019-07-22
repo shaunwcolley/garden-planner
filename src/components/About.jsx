@@ -14,12 +14,11 @@ class About extends Component {
     }
   }
 
-  handleToggleReset = () => {
+  handleSizeReset = () => {
     const {topDia, midDia, botDia } = this.state
     const circles = document.querySelectorAll('.about-circle')
     circles.forEach(circle => {
       if(circle.classList.contains('top-circle')) {
-        console.log('click')
         circle.style.height = topDia + 'px';
         circle.style.width = topDia + 'px';
       }
@@ -31,53 +30,56 @@ class About extends Component {
         circle.style.height = botDia + 'px';
         circle.style.width = botDia + 'px';
       }
+    })
+  }
+
+  handleClassReset = () => {
+    const circles = document.querySelectorAll('.about-circle')
+    circles.forEach(circle => {
       circle.classList.remove('open')
     })
   }
 
   handleCircleClick = (e) => {
-    this.handleToggleReset();
-    function toggleSize(state, prevDia) {
+    this.handleSizeReset();
+    function toggleSize(state, prevDia, t) {
       if (state) {
-        e.target.style.height = prevDia + 'px';
-        e.target.style.width = prevDia + 'px';
+        return
       } else {
         e.target.style.height = (prevDia * 2) + 'px'
         e.target.style.width = (prevDia * 2) + 'px'
       }
     }
     if(e.target.classList.contains('top-circle')) {
-      e.target.classList.toggle('open')
       this.setState({
         topOpen: this.state.topOpen ? false : true,
         midOpen: false,
         botOpen: false,
       })
-      toggleSize(this.state.topOpen, this.state.topDia)
+      toggleSize(this.state.topOpen, this.state.topDia, this)
     }
     if(e.target.classList.contains('middle-circle')) {
-      e.target.classList.toggle('open')
       this.setState({
         topOpen: false,
         midOpen: this.state.midOpen ? false : true,
         botOpen: false,
       })
-      toggleSize(this.state.midOpen, this.state.midDia)
+      toggleSize(this.state.midOpen, this.state.midDia, this)
     }
     if(e.target.classList.contains('bottom-circle')) {
-      e.target.classList.toggle('open')
       this.setState({
         topOpen: false,
         midOpen: false,
         botOpen: this.state.botOpen ? false : true,
       })
-      toggleSize(this.state.botOpen, this.state.midDia)
+      toggleSize(this.state.botOpen, this.state.botDia, this)
     }
   }
 
   handleEscClick = (e) => {
     if(e.keyCode === 27) {
-      this.handleToggleReset();
+      this.handleSizeReset();
+      this.handleClassReset();
     }
   }
 
@@ -89,18 +91,31 @@ class About extends Component {
     document.removeEventListener('keydown', this.handleEscClick)
   }
 
+  // use classToggle function instead of dom altering functions with react, ok with esc key because that is all bound to dom on render.
+
+  classToggle = (state) => {
+    if(state) {
+      return ' open'
+    } else {
+      return ''
+    }
+  }
+
   render() {
+    const topClass = 'about-circle top-circle' + this.classToggle(this.state.topOpen)
+    const midClass = 'about-circle middle-circle' + this.classToggle(this.state.midOpen)
+    const botClass = 'about-circle bottom-circle' + this.classToggle(this.state.botOpen)
     return (
       <div className="about-container">
         <div className="about-body">
-          <div className="about-circle top-circle" onClick={(e) => this.handleCircleClick(e)}>
-            <span>Gardening</span>
+          <div className={topClass} onClick={(e) => this.handleCircleClick(e)}>
+            <p>Gardening</p><p className="hidden-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;made simple. <br/> <br/> You can make and view several plans and modify them throughout a growing season.</p>
           </div>
-          <div className="about-circle middle-circle" onClick={(e) => this.handleCircleClick(e)}>
-            <span>is</span>
+          <div className={midClass} onClick={(e) => this.handleCircleClick(e)}>
+            <p className="hidden-text">The garden planner web-app</p><p>is</p><p className="hidden-text">date based, so the day you make your plan go out and plant! From there the calendar estimates harvest dates.</p>
           </div>
-          <div className="about-circle bottom-circle" onClick={(e) => this.handleCircleClick(e)}>
-            <span>fun!</span>
+          <div className={botClass} onClick={(e) => this.handleCircleClick(e)}>
+            <p className="hidden-text">There is only so much time in a growing season. So spend less time planning and more time having</p><p>fun!</p>
           </div>
         </div>
         <div className="about-footer">
