@@ -50,7 +50,7 @@ class About extends Component {
         e.target.style.width = (prevDia * 2) + 'px'
       }
     }
-    if(e.target.classList.contains('top-circle')) {
+    if(e.target.classList.contains('top-circle') || e.target.parentNode.classList.contains('top-circle')) {
       this.setState({
         topOpen: this.state.topOpen ? false : true,
         midOpen: false,
@@ -58,7 +58,7 @@ class About extends Component {
       })
       toggleSize(this.state.topOpen, this.state.topDia, this)
     }
-    if(e.target.classList.contains('middle-circle')) {
+    if(e.target.classList.contains('middle-circle') || e.target.parentNode.classList.contains('middle-circle')) {
       this.setState({
         topOpen: false,
         midOpen: this.state.midOpen ? false : true,
@@ -66,7 +66,7 @@ class About extends Component {
       })
       toggleSize(this.state.midOpen, this.state.midDia, this)
     }
-    if(e.target.classList.contains('bottom-circle')) {
+    if(e.target.classList.contains('bottom-circle') || e.target.parentNode.classList.contains('bottom-circle')) {
       this.setState({
         topOpen: false,
         midOpen: false,
@@ -94,7 +94,7 @@ class About extends Component {
   // use classToggle function instead of dom altering functions with react, ok with esc key because that is all bound to dom on render.
 
   classToggle = (state) => {
-    if(state) {
+    if (state) {
       return ' open'
     } else {
       return ''
@@ -109,13 +109,13 @@ class About extends Component {
       <div className="about-container">
         <div className="about-body">
           <div className={topClass} onClick={(e) => this.handleCircleClick(e)}>
-            <p>Gardening</p><p className="hidden-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;made simple. <br/> <br/> You can make and view several plans and modify them throughout a growing season.</p>
+            <h2>Gardening</h2><p className="hidden-text">made simple. <br/> <br/> You can make and view several plans and modify them throughout a growing season.</p>
           </div>
           <div className={midClass} onClick={(e) => this.handleCircleClick(e)}>
-            <p className="hidden-text">The garden planner web-app</p><p>is</p><p className="hidden-text">date based, so the day you make your plan go out and plant! From there the calendar estimates harvest dates.</p>
+            <p className="hidden-text">The garden planner web-app</p><h2>is</h2><p className="hidden-text">date based. That means the day you make your plan go out and plant! From there the calendar estimates harvest dates.</p>
           </div>
           <div className={botClass} onClick={(e) => this.handleCircleClick(e)}>
-            <p className="hidden-text">There is only so much time in a growing season. So spend less time planning and more time having</p><p>fun!</p>
+            <p className="hidden-text">There is only so much time in a growing season. <br/>Spend less time planning and more time having</p><h2>fun!</h2>
           </div>
         </div>
         <div className="about-footer">
