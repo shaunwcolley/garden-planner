@@ -18,10 +18,10 @@
 
 .about-circle {
   display: flex;
-  flex-direction: column;
   position: absolute;
   align-items: center;
   justify-content: center;
+  text-align: center;
   border-radius: 50%;
   border: solid;
   color: white;
@@ -36,11 +36,14 @@
 
 .about-circle .hidden-text {
   position: absolute;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.7s, opacity 0.7s cubic-bezier(0.57,-0.01, 0.7,-0.11);
 }
 
 .about-circle:hover {
   background-color: white;
+  border-color: white;
   color: #6A8EAE;
   cursor: pointer;
 }
@@ -56,8 +59,8 @@
 }
 
 .top-circle > *:last-child {
-  transform: translateY(1400%);
   max-width: 275px;
+  margin-top: 0px;
 }
 
 .middle-circle {
@@ -71,11 +74,7 @@
   margin-left: 255px;
   top: 390px;
 }
-.middle-circle > *:first-child {
-  transform: translateY(-1400%);
-}
 .middle-circle > *:last-child {
-  transform: translateY(1000%);
   max-width: 260px;
 }
 
@@ -91,7 +90,6 @@
   right: 150px;
 }
 .bottom-circle > *:first-child {
-  transform: translateY(-1400%);
   max-width: 260px;
 }
 
@@ -124,12 +122,13 @@
 }
 
 .about-circle.open > *:last-child {
-  transform: translateY(80%) translateX(7%);
+  transform: translateY(40px);
 }
 .about-circle.open > *:first-child {
-  transform: translateY(-130%);
+  transform: translateY(-45px);
 }
 
 .about-circle.open > * {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
