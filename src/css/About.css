@@ -1,14 +1,21 @@
 .about-container {
+  font-family: Verdana;
   display: flex;
   justify-content: center;
   overflow: hidden;
 }
 
+.about-container h2 {
+  font-variant: small-caps;
+}
+
 .about-body {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-end;
   min-width: 960px;
+  height: 46rem;
   /* background-image: url("https://cdn.pixabay.com/photo/2017/02/01/11/25/background-2029771_960_720.png"); */
   /* background-image: url("http://res.publicdomainfiles.com/pdf_view/68/13925543416229.png"); */
   /* background-image: url("https://www.goodfreephotos.com/albums/vector-images/red-radish-vector-clipart.png"); */
@@ -49,7 +56,8 @@
 }
 
 .top-circle {
-  right: 345px;
+  right: 17rem;
+  top: 0rem;
   width: 275px;
   height: 275px;
   border-color: #D1FAFF;
@@ -65,29 +73,24 @@
 
 .middle-circle {
   align-self: flex-start;
-  margin-left: 260px;
-  margin-top: 25px;
+  top: 20rem;
   width: 150px;
   height: 150px;
   border-color: #6A8EAE;
   background-color: #6A8EAE;
-  margin-left: 255px;
-  top: 390px;
+  left: 14rem;
 }
 .middle-circle > *:last-child {
   max-width: 260px;
 }
 
 .bottom-circle {
-  margin-right: 125px;
-  margin-top: 50px;
-  margin-bottom: 25px;
   width: 200px;
   height: 200px;
   border-color: #57A773;
   background-color: #57A773;
-  bottom: 100px;
-  right: 150px;
+  bottom: 5rem;
+  right: 14rem;
 }
 .bottom-circle > *:first-child {
   max-width: 260px;
@@ -121,11 +124,17 @@
   z-index: 2;
 }
 
-.about-circle.open > *:last-child {
-  transform: translateY(40px);
+.top-circle.open > *:last-child {
+  transform: translateY(70px);
 }
-.about-circle.open > *:first-child {
+.middle-circle.open > *:last-child {
+  transform: translateY(50px);
+}
+.middle-circle.open > *:first-child {
   transform: translateY(-45px);
+}
+.bottom-circle.open > *:first-child {
+  transform: translateY(-85px);
 }
 
 .about-circle.open > * {
