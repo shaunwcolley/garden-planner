@@ -112,10 +112,10 @@ class About extends Component {
             <h2>Gardening</h2><p className="hidden-text">made simple. <br/> <br/> You can make and view several plans and modify them throughout a growing season.</p>
           </div>
           <div className={midClass} onClick={(e) => this.handleCircleClick(e)}>
-            <p className="hidden-text">The garden planner web-app</p><h2>is</h2><p className="hidden-text">date based. That means the day you make your plan go out and plant! From there the calendar estimates harvest dates.</p>
+            <p className="hidden-text">The garden planner web-app</p><h2>Is</h2><p className="hidden-text">date based. That means the day you make your plan go out and plant! From there the calendar estimates harvest dates.</p>
           </div>
           <div className={botClass} onClick={(e) => this.handleCircleClick(e)}>
-            <p className="hidden-text">There is only so much time in a growing season. <br/>Spend less time planning and more time having</p><h2>fun!</h2>
+            <p className="hidden-text">There is only so much time in a growing season. <br/>Spend less time planning and more time having</p><h2>Fun!</h2>
           </div>
         </div>
         <div className="about-footer">

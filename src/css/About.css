@@ -1,7 +1,12 @@
 .about-container {
+  font-family: Verdana;
   display: flex;
   justify-content: center;
   overflow: hidden;
+}
+
+.about-container h2 {
+  font-variant: small-caps;
 }
 
 .about-body {
@@ -119,11 +124,17 @@
   z-index: 2;
 }
 
-.about-circle.open > *:last-child {
-  transform: translateY(40px);
+.top-circle.open > *:last-child {
+  transform: translateY(70px);
 }
-.about-circle.open > *:first-child {
+.middle-circle.open > *:last-child {
+  transform: translateY(50px);
+}
+.middle-circle.open > *:first-child {
   transform: translateY(-45px);
+}
+.bottom-circle.open > *:first-child {
+  transform: translateY(-85px);
 }
 
 .about-circle.open > * {
