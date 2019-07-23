@@ -42,12 +42,13 @@ class About extends Component {
 
   handleCircleClick = (e) => {
     this.handleSizeReset();
-    function toggleSize(state, prevDia, t) {
+    function toggleSize(state, prevDia, circleClass) {
       if (state) {
         return
       } else {
-        e.target.style.height = (prevDia * 2) + 'px'
-        e.target.style.width = (prevDia * 2) + 'px'
+        const circle = document.querySelector(circleClass)
+        circle.style.height = (prevDia * 2) + 'px'
+        circle.style.width = (prevDia * 2) + 'px'
       }
     }
     if(e.target.classList.contains('top-circle') || e.target.parentNode.classList.contains('top-circle')) {
@@ -56,15 +57,14 @@ class About extends Component {
         midOpen: false,
         botOpen: false,
       })
-      toggleSize(this.state.topOpen, this.state.topDia, this)
+      toggleSize(this.state.topOpen, this.state.topDia, '.top-circle')
     }
     if(e.target.classList.contains('middle-circle') || e.target.parentNode.classList.contains('middle-circle')) {
       this.setState({
-        topOpen: false,
         midOpen: this.state.midOpen ? false : true,
         botOpen: false,
       })
-      toggleSize(this.state.midOpen, this.state.midDia, this)
+      toggleSize(this.state.midOpen, this.state.midDia, '.middle-circle')
     }
     if(e.target.classList.contains('bottom-circle') || e.target.parentNode.classList.contains('bottom-circle')) {
       this.setState({
@@ -72,7 +72,7 @@ class About extends Component {
         midOpen: false,
         botOpen: this.state.botOpen ? false : true,
       })
-      toggleSize(this.state.botOpen, this.state.botDia, this)
+      toggleSize(this.state.botOpen, this.state.botDia, '.bottom-circle')
     }
   }
 
