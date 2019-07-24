@@ -28,13 +28,14 @@ class Login extends Component {
       message: "..."
     })
     axios.post('https://garden-planner-api.herokuapp.com/login', this.state)
-    .then(response => {
+    .then(async (response) => {
       if (response.data.success){
         const token = response.data.token;
         const userId = response.data.userId;
-        localStorage.setItem('jsonwebtoken', token);
-        this.props.onSignIn(token, userId);
-        setAuthHeader(token);
+        await localStorage.setItem('jsonwebtoken', token);
+        await setAuthHeader(token);
+        await this.props.onSignIn(token, userId);
+        this.props.onLoginPop()
         return
       } else if(!response.data.success) {
         this.setState({
@@ -43,7 +44,7 @@ class Login extends Component {
         });
       return
       };
-    }).then(() => this.props.onLoginPop()).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }));
+    }).catch(error => this.setState({ ...this.state, message: `Error: ${error}.` }));
   }
 
   handleRegistrationLinkClick = () => {
