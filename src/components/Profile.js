@@ -9,7 +9,7 @@ class Profile extends Component {
     this.state = {
       user: false,
       update: false,
-      url: 'http://localhost:8080/api/profile/' + this.props.userId,
+      url: 'https://garden-planner-api.herokuapp.com/api/profile/' + this.props.userId,
     };
   };
 
