@@ -7,6 +7,12 @@
 .register-body input {
   margin: .5rem;
 }
+.register-form label {
+  padding: .5rem;
+}
+.register-form select {
+  margin: .5rem;
+}
 .register-btn {
   font-size: 1rem;
   background-color: white;

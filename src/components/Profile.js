@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Popup from './Popup';
 import axios from 'axios';
+import '../css/Profile.css';
 
 class Profile extends Component {
   constructor(props) {
@@ -35,17 +36,11 @@ class Profile extends Component {
       Thyme: 'https://cdn.pixabay.com/photo/2016/04/01/10/51/creeping-1300062_960_720.png',
     }
     if(this.state.user){
-      const { email, firstName, lastName, favVeg, zipCode } = this.state;
+      const { firstName, favVeg } = this.state;
       const avatar = <img className="avatar" alt="vegetable-avatar" src={avatarImages[favVeg]}></img>
-      const profileDisplay = <div>
+      const profileDisplay = <div className="profile-body">
+      Hello, {firstName}
       {avatar}
-      <ul>
-      <li><h3>Profile</h3></li>
-      <li>Name: {firstName} {lastName}</li>
-      <li>Email: {email}</li>
-      <li> Favorite Vegetable: {favVeg}</li>
-      <li>Zip Code: {zipCode}</li>
-      </ul>
       <button onClick={() => this.props.onProfilePop()}>Edit Profile</button>
       </div>
       return <Fragment>

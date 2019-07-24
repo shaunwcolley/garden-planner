@@ -20,14 +20,12 @@ export class Header extends Component {
     this.props.history.push('/')
   }
   render() {
-    const profileLink = "/profile/" + this.props.userId
     return (
       <div className="header">
         <div><NavLink to='/' className="navLink">Home</NavLink></div>
         {!this.props.isAuthenticated ? <button className="navLinkButton login-link" onClick={() => this.handleLoginPopupClick()}>Login</button> : null}
         {!this.props.isAuthenticated ? <button className="navLinkButton" onClick={() => this.handleRegisterPopupClick()}>Register</button> : null}
-        {this.props.isAuthenticated ? <div className="profile-link"> <NavLink to={profileLink} className="navLink"> Profile </NavLink></div> : null }
-        {this.props.isAuthenticated ? <button className="navLinkButton" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
+        {this.props.isAuthenticated ? <button className="navLinkButton signout-link" onClick={() => this.handleSignOutClick()}>Sign Out</button> : null }
       </div>
     )
   }

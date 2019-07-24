@@ -10,7 +10,6 @@ import '../css/Popup.css';
 class Popup extends Component {
 
   handleClosePopClick = () => {
-    console.log('click')
     switch(true) {
       case this.props.login :
       return this.props.onLoginPop();
@@ -23,6 +22,20 @@ class Popup extends Component {
       default :
       return
     }
+  }
+
+  handleEscClick = (e) => {
+    if(e.keyCode === 27) {
+      this.handleClosePopClick();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleEscClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleEscClick)
   }
 
   render() {
