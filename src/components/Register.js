@@ -23,12 +23,13 @@ class Register extends Component {
     })
   }
 
-  handleRegisterClick = () => {
+  handleRegisterClick = (e) => {
+    e.preventDefault();
     const creds = this.state;
-    console.log('register')
-    axios.post('http://localhost:8080/register', creds)
+    axios.post('https://garden-planner-api.herokuapp.com/register', creds)
     .then(response => {
       if (response.data.success) {
+        alert('Successfully Registered');
         this.props.onRegisterPop();
         this.props.history.push('/');
         return
@@ -64,7 +65,7 @@ class Register extends Component {
           <input autoComplete="username" onChange={this.handleTextBoxChange} type='text' placeholder="abc123@email.com" name="email"/>
           <label>Password</label>
           <input autoComplete="new-password" onChange={this.handleTextBoxChange} type='password' placeholder="password" name="pass"/>
-          <button className="register-btn" onClick={() => this.handleRegisterClick()}>Register</button>
+          <button className="register-btn" onClick={(e) => this.handleRegisterClick(e)}>Register</button>
         </form>
         <h4>{this.state.message}</h4>
       </div>

@@ -27,7 +27,7 @@ class Login extends Component {
       ...this.state,
       message: "..."
     })
-    axios.post('http://localhost:8080/login', this.state)
+    axios.post('https://garden-planner-api.herokuapp.com/login', this.state)
     .then(response => {
       if (response.data.success){
         const token = response.data.token;

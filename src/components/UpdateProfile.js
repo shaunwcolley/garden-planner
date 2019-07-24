@@ -21,7 +21,7 @@ class UpdateProfile extends Component {
   }
   handlePostUpdateClick = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:8080/api/profile/update/${this.props.user.id}`, this.state)
+    axios.post(`https://garden-planner-api.herokuapp.com/api/profile/update/${this.props.user.id}`, this.state)
     .then(response => {
       if (response.data.success) {
         alert('User info was updated');

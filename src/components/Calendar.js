@@ -14,7 +14,7 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
-    const url = 'http://localhost:8080/api/calendar/' + this.props.userId;
+    const url = 'https://garden-planner-api.herokuapp.com/api/calendar/' + this.props.userId;
     axios.get(url)
     .then(response => {
       if(response.data.success){

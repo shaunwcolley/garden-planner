@@ -106,7 +106,7 @@ class Planner extends Component {
 
   componentDidMount(){
     if(this.props.match.url !== '/plan/new') {
-      let url = 'http://localhost:8080/api' + this.props.match.url
+      let url = 'https://garden-planner-api.herokuapp.com/api' + this.props.match.url
       axios.get(url)
       .then(response => {
         console.log(response.data)
@@ -152,7 +152,7 @@ class Planner extends Component {
   }
 
   handleSavePlanClick = () => {
-    axios.post("http://localhost:8080/api/save-plan", {
+    axios.post("https://garden-planner-api.herokuapp.com/api/save-plan", {
       planName: this.props.planName,
       width: this.props.width,
       height: this.props.height,
@@ -170,7 +170,7 @@ class Planner extends Component {
   }
 
   handleUpdatePlanClick = () => {
-    axios.post("http://localhost:8080/api/update-plan", {
+    axios.post("https://garden-planner-api.herokuapp.com/api/update-plan", {
       plantsInPlan: this.state.plantsInPlan
     }).then(response => {
       this.props.history.push('/')

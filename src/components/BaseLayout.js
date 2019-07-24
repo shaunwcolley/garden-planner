@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'
-import * as actionTypes from '../store/actions/actionTypes'
+import { connect } from 'react-redux';
+import * as actionTypes from '../store/actions/actionTypes';
 
 export class Header extends Component {
 
