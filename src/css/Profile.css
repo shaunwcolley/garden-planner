@@ -1,0 +1,21 @@
+.profile-body {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  text-align: left;
+}
+
+.profile-body > * {
+  margin: 1rem;
+}
+
+.update-profile-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.update-profile-body label {
+  padding: .5rem;
+}

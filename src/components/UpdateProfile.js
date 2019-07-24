@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import '../css/Profile.css';
 
 class UpdateProfile extends Component {
   constructor(props) {
@@ -33,9 +34,10 @@ class UpdateProfile extends Component {
 
     if(this.props.user !== undefined) {
       const { email, firstName, lastName, zipCode } = this.props.user;
-      const profileDisplay = <div>
+      const profileDisplay = <div className="update-profile-body">
       <h3>Profile</h3>
-      <span>Email: {email}</span>
+      <span>Email: </span>
+      <p>{email}</p>
       <form className="register-form">
         <label>First Name</label>
         <input onChange={this.handleTextBoxChange} type='text' placeholder={firstName} name="firstName"/>
