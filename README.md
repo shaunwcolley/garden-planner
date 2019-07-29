@@ -15,7 +15,7 @@ password: test
 
 ## Why?
 
-<img src="readme/landing-page.gif" width="100%" height="450"/>
+<img src="readme/landing-page.gif" width="100%" height="425"/>
 
 After looking for a free decent garden planner I noticed one thing was missing: ability to persist plans over time based on expected harvest dates. Square foot plots in gardens change over time while others can remain the same for months longer. I needed a way to capture this fact when planning my community garden plot. Thus, the SFGP was born. SFGP is a relatively bare bones app that captures the spirit of this feature.
 
@@ -23,19 +23,19 @@ After looking for a free decent garden planner I noticed one thing was missing: 
 
 Users are able to register, login and can make changes to the personal profile information.
 
-<img src="readme/login.gif" width="100%" height="450"/> 
+<img src="readme/login.gif" width="100%" height="425"/> 
 
 <br>
 
 Users are able to view and update previous plans.
 
-<img src="readme/input-scores.gif" width="100%" height="450"/> 
+<img src="readme/input-scores.gif" width="100%" height="425"/> 
 
 <br>
 
 Users are able to create a new plan for a 12 inch planter or as large as is needed.
 
-<img src="readme/view-update-pan.gif" width="100%" height="450"/> 
+<img src="readme/view-update-pan.gif" width="100%" height="425"/> 
 
 <br>
 
