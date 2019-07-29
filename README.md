@@ -9,6 +9,7 @@ The Square Foot Garden Planner (SFGP) is a garden planner that allows user to cr
 Feel free to register, or use the provided credentials:
 
 username: test@test
+<br>
 password: test
 
 
@@ -42,7 +43,7 @@ Users are able to create a new plan for a 12 inch planter or as large as is need
 
 Feel free to suggest future features. Current ideas for features include: viewing garden across time from first planting to future iterations, implementing a companion/foe system, a resources page for square foot garden techniques and facts, a plant spacing system, implementing a grow region recommended planting.
 
-# Contributor:
+## Contributor:
 
 * [Shaun Colley](https://github.com/shaunwcolley)
 
