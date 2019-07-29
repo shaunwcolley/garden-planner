@@ -29,13 +29,13 @@ Users are able to register, login and can make changes to the personal profile i
 
 Users are able to view and update previous plans.
 
-<img src="readme/input-scores.gif" width="100%" height="425"/> 
+<img src="readme/view-update-plan.gif" width="100%" height="425"/> 
 
 <br>
 
 Users are able to create a new plan for a 12 inch planter or as large as is needed.
 
-<img src="readme/view-update-pan.gif" width="100%" height="425"/> 
+<img src="readme/make-plan.gif" width="100%" height="425"/> 
 
 <br>
 
