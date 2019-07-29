@@ -17,7 +17,7 @@ password: test
 
 <img src="readme/landing-page.gif" width="750" height="500"/>
 
-After looking for a free decent garden planner I noticed one thing was missing: ability to persist plans over time based on expected harvest dates. Square foot plots in gardens change over time while others can remain the same for months longer. I needed a way to capture this fact when planning my community garden plot. Thus, the SFGP was born. SFGP is a relatively bare bones app that captures the spirit of this feature.
+After looking for a free decent garden planner I noticed one thing was missing: the ability to persist plans over time based on expected harvest dates. Some spaces in gardens change rapidly over time while others can remain the same for much longer. I needed a way to capture this fact when planning my own community garden plot. Thus, the SFGP was born. SFGP is a relatively bare bones app that captures the spirit of this feature.
 
 <br>
 
